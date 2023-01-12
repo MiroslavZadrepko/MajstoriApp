@@ -1,0 +1,234 @@
+{
+  "users": [
+    {
+      "user_name": "Winifred",
+      "user_email": "user1@gmail.com",
+      "user_password": "user1",
+      "id": 1,
+      "admin": true
+    },
+    {
+      "user_name": "Nat",
+      "user_email": "user2@gmail.com",
+      "user_password": "user2",
+      "id": 2,
+      "admin": false
+    },
+    {
+      "user_name": "Raina",
+      "user_email": "user3@gmail.com",
+      "user_password": "user3",
+      "id": 3,
+      "admin": false
+    },
+    {
+      "user_name": "Noble",
+      "user_email": "user4@gmail.com",
+      "user_password": "user4",
+      "id": 4
+    },
+    {
+      "user_name": "Hannis",
+      "user_email": "user5@gmail.com",
+      "user_password": "user5",
+      "id": 5
+    }
+  ],
+  "majstori": [
+    {
+      "craftsman_name": "Malcolm",
+      "craftsman_last_name": "Suggey",
+      "craftsman_profession": "moler",
+      "craftsman_city": "Novi Sad",
+      "craftsman_email": "msuggey0@aol.com",
+      "craftsman_phone": "894-402-0005",
+      "craftsman_rev": [
+        "dobar majstor",
+        "nisam zadovoljan"
+      ],
+      "id": 1
+    },
+    {
+      "craftsman_name": "Henri",
+      "craftsman_last_name": "Scoggins",
+      "craftsman_profession": "zidar",
+      "craftsman_city": "Subotica",
+      "craftsman_email": "hscoggins1@reference.com",
+      "craftsman_phone": "198-391-1076",
+      "craftsman_rev": [
+        "dobar",
+        "nisam zadovoljan"
+      ],
+      "id": 2
+    },
+    {
+      "craftsman_name": "Gery",
+      "craftsman_last_name": "Casillis",
+      "craftsman_profession": "električar",
+      "craftsman_city": "Niš",
+      "craftsman_email": "gcasillis2@bbb.org",
+      "craftsman_phone": "523-442-8345",
+      "craftsman_rev": [
+        "nisam zadovoljan"
+      ],
+      "id": 3
+    },
+    {
+      "craftsman_name": "Ferne",
+      "craftsman_last_name": "Brew",
+      "craftsman_profession": "bela tehnika",
+      "craftsman_city": "Beograd",
+      "craftsman_email": "fbrew3@oakley.com",
+      "craftsman_phone": "682-840-3643",
+      "craftsman_rev": [
+        "moglo je i bolje",
+        "sve uništio"
+      ],
+      "id": 4
+    },
+    {
+      "craftsman_name": "Redd",
+      "craftsman_last_name": "Huggan",
+      "craftsman_profession": "vodoinstalater",
+      "craftsman_city": "Beograd",
+      "craftsman_email": "rhuggan4@1und1.de",
+      "craftsman_phone": "240-347-5556",
+      "craftsman_rev": [],
+      "id": 5
+    },
+    {
+      "craftsman_name": "Julie",
+      "craftsman_last_name": "Doonican",
+      "craftsman_profession": "električar",
+      "craftsman_city": "Novi Sad",
+      "craftsman_email": "jdoonican5@google.de",
+      "craftsman_phone": "743-647-4524",
+      "craftsman_rev": [],
+      "id": 6
+    },
+    {
+      "craftsman_name": "Carly",
+      "craftsman_last_name": "Lanfare",
+      "craftsman_profession": "veš mašine mašine za sudove",
+      "craftsman_city": "Novi Sad",
+      "craftsman_email": "clanfare6@cafepress.com",
+      "craftsman_phone": "214-757-3607",
+      "craftsman_rev": [
+        "dobar majstor",
+        "nisam zadovoljan"
+      ],
+      "id": 7
+    },
+    {
+      "craftsman_name": "Amby",
+      "craftsman_last_name": "Aspell",
+      "craftsman_profession": "staklar",
+      "craftsman_city": "Novi Sad",
+      "craftsman_email": "aaspell7@china.com.cn",
+      "craftsman_phone": "282-481-0674",
+      "craftsman_rev": [
+        "dobar majstor",
+        "nisam zadovoljan"
+      ],
+      "id": 8
+    },
+    {
+      "craftsman_name": "Quent",
+      "craftsman_last_name": "Anderbrugge",
+      "craftsman_profession": "kožarska radnja",
+      "craftsman_city": "Niš",
+      "craftsman_email": "qanderbrugge8@paypal.com",
+      "craftsman_phone": "969-185-2774",
+      "craftsman_rev": [
+        "dobar majstor",
+        "nisam zadovoljan"
+      ],
+      "id": 9
+    },
+    {
+      "craftsman_name": "Blair",
+      "craftsman_last_name": "Paydon",
+      "craftsman_profession": "kućni aparati",
+      "craftsman_city": "Zrenjanin",
+      "craftsman_email": "bpaydon9@state.gov",
+      "craftsman_phone": "266-520-4818",
+      "craftsman_rev": [
+        "dobar majstor",
+        "nisam zadovoljan"
+      ],
+      "id": 10
+    }
+  ],
+  "tmp": [
+    {
+      "craftsman_name": "Marko",
+      "craftsman_last_name": "Markovic",
+      "craftsman_profession": "kućni aparati",
+      "craftsman_city": "Sombor",
+      "craftsman_email": "bpaydon9@gmail.com",
+      "craftsman_phone": "266-520-4818",
+      "id": 1
+    },
+    {
+      "craftsman_name": "pera",
+      "craftsman_last_name": "perić",
+      "craftsman_profession": "struju",
+      "craftsman_city": "Novi Sad",
+      "craftsman_email": "majstor@gmail.com",
+      "craftsman_phone": "1231234567",
+      "id": 2
+    },
+    {
+      "craftsman_name": "đura",
+      "craftsman_last_name": "đurić",
+      "craftsman_profession": "električar",
+      "craftsman_city": "Subotica",
+      "craftsman_email": "",
+      "craftsman_phone": "0601234567",
+      "craftsman_rev": [],
+      "id": 3
+    }
+  ],
+  "tmpRew": [
+    {
+      "rewTxt": "prva recenzija",
+      "rewCraftID": "1",
+      "id": 1
+    },
+    {
+      "rewTxt": "druga recenzija",
+      "rewCraftID": "1",
+      "id": 2
+    },
+    {
+      "rewTxt": "treća recenzija",
+      "rewCraftID": "6",
+      "id": 3
+    },
+    {
+      "rewTxt": "četvrta recenzija",
+      "rewCraftID": "6",
+      "id": 4
+    },
+    {
+      "rewTxt": "peta recenzija",
+      "rewCraftID": "6",
+      "id": 5
+    },
+    {
+      "rewTxt": "šesta recenzij",
+      "rewCraftID": "1",
+      "id": 6
+    },
+    {
+      "rewTxt": "sedma recenzij",
+      "rewCraftID": "1",
+      "id": 7
+    },
+    {
+      "rewTxt": "osma recenzij",
+      "rewCraftID": "1",
+      "id": 8
+    }
+  ]
+}
