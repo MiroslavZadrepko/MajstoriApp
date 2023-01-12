@@ -1,0 +1,28 @@
+{
+  "name": "majstori",
+  "version": "1.0.0",
+  "description": "Craftsman's application.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node api/server.js",
+    "server": "nodemon api/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiroslavZadrepko/MajstoriApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MiroslavZadrepko/MajstoriApp/issues"
+  },
+  "homepage": "https://github.com/MiroslavZadrepko/MajstoriApp#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
