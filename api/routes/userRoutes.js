@@ -1,21 +1,14 @@
 const express = require('express');
 const routerUser = express.Router();
+const { getAllCraftsmans, addUser, addTmpCraftsman, addTmpReviw } = require('../controllers/userControllers');
 
-router.get('/', (req,res) => {
-    res.status(200).json({message: '/api/user get All Craftsmans works'})
-})
+router.get('/', getAllCraftsmans);
 
-router.post('/', (req,res) => {
-    res.status(200).json({message: '/api/user add User'})
-})
+router.post('/', addUser);
 
-router.post('/', (req,res) => {
-    res.status(200).json({message: '/api/user add Tmp Craftsman works'})
-})
+router.post('/', addTmpCraftsman);
 
-router.post('/', (req,res) => {
-    res.status(200).json({message: '/api/user add Tmp Review works'})
-})
+router.post('/', addTmpReviw);
 
 /*
 router.get('/', (req,res) => {
