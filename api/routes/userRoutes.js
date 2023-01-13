@@ -2,13 +2,13 @@ const express = require('express');
 const routerUser = express.Router();
 const { getAllCraftsmans, addUser, addTmpCraftsman, addTmpReviw } = require('../controllers/userControllers');
 
-router.get('/', getAllCraftsmans);
+routerUser.get('/', getAllCraftsmans);
 
-router.post('/', addUser);
+routerUser.post('/', addUser);
 
-router.post('/', addTmpCraftsman);
+routerUser.post('/', addTmpCraftsman);
 
-router.post('/', addTmpReviw);
+routerUser.post('/', addTmpReviw);
 
 /*
 router.get('/', (req,res) => {
