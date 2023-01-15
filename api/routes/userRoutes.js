@@ -1,9 +1,9 @@
 const express = require('express');
 const routerUser = express.Router();
-const { 
+const {
     getAllCraftsmans,
-    addUser, 
-    addTmpCraftsman, 
+    addUser,
+    addTmpCraftsman,
     addTmpReviw } = require('../controllers/userControllers');
 
 routerUser.get('/', getAllCraftsmans);
