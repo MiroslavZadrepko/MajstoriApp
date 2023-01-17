@@ -10,19 +10,16 @@ const Review = ({ id }) => {
     const [status, setStatus] = useState(NaN)
 
     return (
-        
+
         <>
             <RevFormStyled onSubmit={(e) => {
                 e.preventDefault()
+
                 addTmpReview(recenzija, id).then(res => {
-
                     const timer = setTimeout(() => {
-
                         setStatus(res.status)
-
                         return () => clearTimeout(timer);
                     }, 500);
-
                 });
             }
             }> {isNaN(status) ?

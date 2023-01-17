@@ -2,9 +2,7 @@ const asyncHandler = require('express-async-handler');
 const Craftsman = require('../models/craftsmanModel')
 
 const getAllCraftsmans = asyncHandler(async (req, res) => {
-
     const craftsmans = await Craftsman.find();
-
     res.status(200).json(craftsmans)
 })
 

@@ -1,3 +1,6 @@
+## READ FIRST
+After Heroku stoped free services I decided to switch to mongoDB. So, this is under construction, so to say, and it is not fully functional. 
+
 ## Project title
 Craftsman's application.
  

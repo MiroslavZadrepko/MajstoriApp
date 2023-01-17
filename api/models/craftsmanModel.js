@@ -1,31 +1,32 @@
 const mongoose = require('mongoose');
 
 const craftsmanSchema = mongoose.Schema({
-    name: {
+    craftsman_name: {
         type: String,
         required: [true, 'Please add crfatsmans name']
     },
-    last_name: {
+    craftsman_last_name: {
         type: String,
         required: [true, 'Please add crfatsmans last name']
     },
-    profession: {
+    professcraftsman_professionion: {
         type: String,
         required: [true, 'Please add crfatsmans profession']
     },
-    city: {
+    craftsman_city: {
         type: String,
         required: [true, 'Please add crfatsmans city']
     },
-    email: {
-        type: String, /**e-mail */
+    craftsman_email: {
+        type: String,
+        unique: [true, 'e-mail already exists']
     },
-    phone: {
+    craftsman_phone: {
         type: Number,
         required: [true, 'Please add crfatsmans phonenumber']
     },
-    review: {
-        type: String, /**array of revs */
+    craftsman_rev: {
+        type: [String]
     }
 })
 
