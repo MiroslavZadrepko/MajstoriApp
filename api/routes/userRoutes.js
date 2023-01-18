@@ -5,10 +5,10 @@ const {
     addUser,
     addTmpCraftsman,
     addTmpReviw } = require('../controllers/userControllers');
-
+ 
 routerUser.get('/', getAllCraftsmans);
 routerUser.post('/', addUser);
-routerUser.post('/', addTmpCraftsman);
-routerUser.post('/', addTmpReviw);
+routerUser.post('/', addTmpCraftsman);// tmpcraft
+routerUser.post('/', addTmpReviw);// tmprev/:id majstora za kog se daje rew
 
 module.exports = routerUser; 

@@ -1,5 +1,5 @@
 const express = require('express');
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 const { errorHandler } = require('./middleware/errorMiddleware');
 const conectDB = require('./config/db')
 const port = process.env.PORT || 5000;
@@ -7,6 +7,12 @@ const port = process.env.PORT || 5000;
 conectDB();
 
 const app = express();
+
+//dev part just to check what the hell am i doin
+app.use((req, res, next) => {
+    console.log(req.path, req.method);
+    next();
+})
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))

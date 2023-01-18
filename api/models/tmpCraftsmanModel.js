@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const craftsmanSchema = mongoose.Schema({
+const tmpCraftsmanSchema = mongoose.Schema({
     craftsman_name: {
         type: String,
         required: [true, 'Please add crfatsmans name']
@@ -31,4 +31,4 @@ const craftsmanSchema = mongoose.Schema({
 }, {timestamps: true}
 );
 
-module.exports = mongoose.model('Craftsman', craftsmanSchema);
+module.exports = mongoose.model('TmpCraftsman', tmpCraftsmanSchema);
