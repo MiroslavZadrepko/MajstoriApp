@@ -6,9 +6,9 @@ import { LogRevSend } from './styles/LogRevSend.styled';
 const Register = ({ setUser, user }) => {
 
     const [newUser, setNewUser] = useState({
-        userName: "",
-        userMail: "",
-        userPass: ""
+        user_name: "",
+        user_email: "",
+        user_password: ""
 
     })
 
@@ -22,10 +22,24 @@ const Register = ({ setUser, user }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const user = { user_name, user_email, user_password};
+        const respons = fetch('/api/user', {
+            method: POST,
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+
         getAllUsers().then(res => {
 
-            if (!res.data.some(user => user.user_password == newUser.userPass || user.user_email == newUser.userMail)) {
-                addUser(newUser.userName, newUser.userMail, newUser.userPass).then(res => { setUser(res.data) })
+            if (!res.data.some(user => user.user_password == newUser.user_password || user.user_email == newUser.user_email)) {
+                addUser(newUser.user_name, newUser.user_email, newUser.user_password)
+                .then(res => { 
+                    setUser(res.data) }
+                )
             }
             //gde se preusmerava, ubaciti isLoged=True
             //da ispiše grešku
@@ -37,9 +51,9 @@ const Register = ({ setUser, user }) => {
             <label>
                 <LogRegInput
                     type="text"
-                    name="userName"
+                    name="user_name"
                     placeholder="Unesite korisničko ime"
-                    value={newUser.userName}
+                    value={newUser.user_name}
                     onChange={handleChange}
                     required
                 />
@@ -47,9 +61,9 @@ const Register = ({ setUser, user }) => {
             <label>
                 <LogRegInput
                     type="email"
-                    name="userMail"
+                    name="user_email"
                     placeholder="Unesite e-mail"
-                    value={newUser.userMail}
+                    value={newUser.user_email}
                     onChange={handleChange}
                     required
                 />
@@ -57,9 +71,9 @@ const Register = ({ setUser, user }) => {
             <label>
                 <LogRegInput
                     type="password"
-                    name="userPass"
+                    name="user_password"
                     placeholder="Unesite šifru"
-                    value={newUser.userPass}
+                    value={newUser.user_password}
                     onChange={handleChange}
                     required
                 />
