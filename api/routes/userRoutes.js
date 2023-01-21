@@ -4,10 +4,14 @@ const {
     getAllCraftsmans,
     addUser,
     addTmpCraftsman,
-    addTmpReviw } = require('../controllers/userControllers');
- 
+    addTmpReviw, 
+    loginUser,
+    getMe} = require('../controllers/userControllers');
+
+routerUser.post('/', addUser); 
+routerUser.post('/login', loginUser);
+routerUser.get('/me', getMe);
 routerUser.get('/', getAllCraftsmans);
-routerUser.post('/', addUser);
 routerUser.post('/', addTmpCraftsman);// tmpcraft
 routerUser.post('/', addTmpReviw);// tmprev/:id majstora za kog se daje rew
 
