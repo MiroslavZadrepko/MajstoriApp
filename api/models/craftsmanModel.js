@@ -9,7 +9,7 @@ const craftsmanSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please add crfatsmans last name']
     },
-    professcraftsman_professionion: {
+    craftsman_professionion: {
         type: String,
         required: [true, 'Please add crfatsmans profession']
     },

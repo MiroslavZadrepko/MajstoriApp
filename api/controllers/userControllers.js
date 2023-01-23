@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
 const Craftsman = require('../models/craftsmanModel');
+const tmpCraftsman = require('../models/tmpCraftsmanModel')
 const User = require('../models/userModel');
 
 /** REGISTER NEW USER
@@ -81,18 +82,61 @@ const generateToken = (id) => {
     })
 }
 
-///////////////////////
-//////TO BE DONE!!!!!!/
-///////////////////////
-
 const getAllCraftsmans = asyncHandler(async (req, res) => {
     const craftsmans = await Craftsman.find();
     res.status(200).json(craftsmans)
 });
 
 const addTmpCraftsman = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: '/api/user add Tmp Craftsman works' })
+
+    const { user, craftsman_name, craftsman_last_name, craftsman_professionion, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev } = req.body;
+
+    //check if all fields ar ok
+    if (!user || !craftsman_name || !craftsman_last_name || !craftsman_professionion || !craftsman_city || !craftsman_phone) {
+        res.status(400);
+        throw new Error('Fill all required fields, pls')
+    }
+
+    //check if craftsman exists
+    const craftsmanExists = await Craftsman.findOne({ craftsman_phone })
+    if (craftsmanExists) {
+        res.status(400);
+        throw new Error('Craftsman with that phonenumber already exists')
+    }
+
+    //create tmp craftsman
+    const tmpCraftsman = await tmpCraftsman.create({
+        user,
+        craftsman_name,
+        craftsman_last_name,
+        craftsman_professionion,
+        craftsman_city,
+        craftsman_email,
+        craftsman_phone,
+        craftsman_rev
+    });
+
+    if (tmpCraftsman) {
+        res.status(201).json({
+            _id: tmpCraftsman.id,
+            user: tmpCraftsman.user,
+            craftsman_name: tmpCraftsman.craftsman_name,
+            craftsman_last_name: tmpCraftsman.craftsman_last_name,
+            craftsman_professionion: tmpCraftsman.craftsman_professionion,
+            craftsman_city: tmpCraftsman.craftsman_city,
+            craftsman_email: tmpCraftsman.craftsman_email,
+            craftsman_phone: tmpCraftsman.craftsman_phone,
+            craftsman_rev: tmpCraftsman.craftsman_rev
+        })
+    } else {
+        res.status(400);
+        throw new Error('Invalid data')
+    }
 });
+
+///////////////////////
+//////TO BE DONE!!!!!!/
+///////////////////////
 
 const addTmpReviw = asyncHandler(async (req, res) => {
     res.status(200).json({ message: '/api/user add Tmp Review works' })
