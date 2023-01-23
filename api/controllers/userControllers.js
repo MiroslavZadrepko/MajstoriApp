@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
 const Craftsman = require('../models/craftsmanModel');
-const tmpCraftsman = require('../models/tmpCraftsmanModel')
+const TmpCraftsman = require('../models/tmpCraftsmanModel');
+const TmpReview = require('../models/tmpReviewModel');
 const User = require('../models/userModel');
 
 /** REGISTER NEW USER
@@ -105,7 +106,7 @@ const addTmpCraftsman = asyncHandler(async (req, res) => {
     }
 
     //create tmp craftsman
-    const tmpCraftsman = await tmpCraftsman.create({
+    const tmpCraftsman = await TmpCraftsman.create({
         user,
         craftsman_name,
         craftsman_last_name,
@@ -134,12 +135,34 @@ const addTmpCraftsman = asyncHandler(async (req, res) => {
     }
 });
 
-///////////////////////
-//////TO BE DONE!!!!!!/
-///////////////////////
-
 const addTmpReviw = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: '/api/user add Tmp Review works' })
+
+    const {user, revTxt, revCraftID} = req.body
+
+    //check if all fields are filled
+    if(!user || !revTxt || !revCraftID) {
+        res.status(400)
+        throw new Error('All fields must bi filled');
+    }
+
+    //create tmp rev
+    const tmpReviw = await TmpReview.create({
+        user,
+        revTxt,
+        revCraftID
+    })
+
+    if(tmpReviw) {
+        res.status(201).json({
+            _id: tmpReviw.id,
+            user: tmpReviw.user,
+            revTxt: tmpReviw.revTxt,
+            revCraftID: tmpReviw.revCraftID
+        })
+    } else {
+        res.status(400);
+        throw new Error('Invalid data')
+    }
 });
 
 module.exports = {
