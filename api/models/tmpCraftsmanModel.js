@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
-const tmpCraftsmanSchema = mongoose.Schema(
-    {
-        user: {
+const tmpCraftsmanSchema = mongoose.Schema({
+       user: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
             ref: 'User'
@@ -25,7 +24,6 @@ const tmpCraftsmanSchema = mongoose.Schema(
         },
         craftsman_email: {
             type: String,
-            unique: [true, 'e-mail already exists']
         },
         craftsman_phone: {
             type: Number,

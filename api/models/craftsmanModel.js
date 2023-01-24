@@ -19,7 +19,6 @@ const craftsmanSchema = mongoose.Schema({
     },
     craftsman_email: {
         type: String,
-        unique: [true, 'e-mail already exists']
     },
     craftsman_phone: {
         type: Number,

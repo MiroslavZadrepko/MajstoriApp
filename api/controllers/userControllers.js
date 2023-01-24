@@ -2,12 +2,11 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
 const Craftsman = require('../models/craftsmanModel');
-const TmpCraftsman = require('../models/tmpCraftsmanModel');
-const TmpReview = require('../models/tmpReviewModel');
 const User = require('../models/userModel');
 
 /** REGISTER NEW USER
- *  POST api/user */
+ *  POST api/user 
+ */
 const addUser = asyncHandler(async (req, res) => {
 
     const { user_name, user_email, user_password } = req.body;
@@ -50,7 +49,8 @@ const addUser = asyncHandler(async (req, res) => {
 });
 
 /** login nad auth user
- *  POST api/user/login */
+ *  POST api/user/login
+ */
 const loginUser = asyncHandler(async (req, res) => {
 
     const { user_email, user_password } = req.body;
@@ -72,7 +72,8 @@ const loginUser = asyncHandler(async (req, res) => {
 
 /** get user data
  * GET api/user/me 
- * private route*/
+ * private route
+ */
 const getMe = asyncHandler(async (req, res) => {
     res.json({ message: 'get my data' })
 });
@@ -82,87 +83,12 @@ const generateToken = (id) => {
         expiresIn: '7d'
     })
 }
-
+/** Get all craftsman, needs to be done
+ * GET
+ */
 const getAllCraftsmans = asyncHandler(async (req, res) => {
     const craftsmans = await Craftsman.find();
     res.status(200).json(craftsmans)
-});
-
-const addTmpCraftsman = asyncHandler(async (req, res) => {
-
-    const { user, craftsman_name, craftsman_last_name, craftsman_professionion, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev } = req.body;
-
-    //check if all fields ar ok
-    if (!user || !craftsman_name || !craftsman_last_name || !craftsman_professionion || !craftsman_city || !craftsman_phone) {
-        res.status(400);
-        throw new Error('Fill all required fields, pls')
-    }
-
-    //check if craftsman exists
-    const craftsmanExists = await Craftsman.findOne({ craftsman_phone })
-    if (craftsmanExists) {
-        res.status(400);
-        throw new Error('Craftsman with that phonenumber already exists')
-    }
-
-    //create tmp craftsman
-    const tmpCraftsman = await TmpCraftsman.create({
-        user,
-        craftsman_name,
-        craftsman_last_name,
-        craftsman_professionion,
-        craftsman_city,
-        craftsman_email,
-        craftsman_phone,
-        craftsman_rev
-    });
-
-    if (tmpCraftsman) {
-        res.status(201).json({
-            _id: tmpCraftsman.id,
-            user: tmpCraftsman.user,
-            craftsman_name: tmpCraftsman.craftsman_name,
-            craftsman_last_name: tmpCraftsman.craftsman_last_name,
-            craftsman_professionion: tmpCraftsman.craftsman_professionion,
-            craftsman_city: tmpCraftsman.craftsman_city,
-            craftsman_email: tmpCraftsman.craftsman_email,
-            craftsman_phone: tmpCraftsman.craftsman_phone,
-            craftsman_rev: tmpCraftsman.craftsman_rev
-        })
-    } else {
-        res.status(400);
-        throw new Error('Invalid data')
-    }
-});
-
-const addTmpReviw = asyncHandler(async (req, res) => {
-
-    const {user, revTxt, revCraftID} = req.body
-
-    //check if all fields are filled
-    if(!user || !revTxt || !revCraftID) {
-        res.status(400)
-        throw new Error('All fields must bi filled');
-    }
-
-    //create tmp rev
-    const tmpReviw = await TmpReview.create({
-        user,
-        revTxt,
-        revCraftID
-    })
-
-    if(tmpReviw) {
-        res.status(201).json({
-            _id: tmpReviw.id,
-            user: tmpReviw.user,
-            revTxt: tmpReviw.revTxt,
-            revCraftID: tmpReviw.revCraftID
-        })
-    } else {
-        res.status(400);
-        throw new Error('Invalid data')
-    }
 });
 
 module.exports = {
@@ -170,6 +96,4 @@ module.exports = {
     loginUser,
     getMe,
     getAllCraftsmans,
-    addTmpCraftsman,
-    addTmpReviw
 };
