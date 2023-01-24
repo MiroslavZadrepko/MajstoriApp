@@ -6,7 +6,7 @@ const Craftsman = require('../models/craftsmanModel')
 
 /**  */
 const addTmpCraftsman = asyncHandler(async (req, res) => {
-
+    
     const { craftsman_name, craftsman_last_name, craftsman_professionion, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev } = req.body;
 
     //check if all fields ar ok
@@ -23,7 +23,7 @@ const addTmpCraftsman = asyncHandler(async (req, res) => {
         throw new Error('Craftsman with that phonenumber already exists')
     }
 
-    const user = await User.findById(req.body.id)
+    const user = await User.findById(req.user.id).select("-user_password");
     //create tmp craftsman
     const tmpCraftsman = await TmpCraftsman.create({
         craftsman_name: req.body.craftsman_name,
@@ -31,7 +31,6 @@ const addTmpCraftsman = asyncHandler(async (req, res) => {
         craftsman_professionion: req.body.craftsman_professionion,
         craftsman_city: req.body.craftsman_city,
         craftsman_email: req.body.craftsman_email,
-        craftsman_phone: req.body.craftsman_phone,
         craftsman_phone: req.body.craftsman_phone,
         user
     });
