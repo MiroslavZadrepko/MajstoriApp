@@ -1,10 +1,6 @@
 const express = require('express');
 const routerUser = express.Router();
-const {
-    getAllCraftsmans,
-    addUser,
-    loginUser,
-    getMe } = require('../controllers/userControllers');
+const { getAllCraftsmans, addUser, loginUser, getMe } = require('../controllers/userControllers');
 const { protect } = require('../middleware/authMiddleware')
 
 routerUser.post('/', addUser);

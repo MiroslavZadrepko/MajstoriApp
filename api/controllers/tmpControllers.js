@@ -58,6 +58,8 @@ const addTmpReviw = asyncHandler(async (req, res) => {
 
     const { revTxt, revCraftID } = req.body;
 
+    //add find craftsman by ID
+
     //check if all fields are filled
     if (!revTxt || !revCraftID) {
         res.status(400)
@@ -65,7 +67,7 @@ const addTmpReviw = asyncHandler(async (req, res) => {
     }
 
     const user = await User.findById(req.user.id);
-
+    //add created by const {user_name, user_last_name} = user
     if (!user) {
         res.status(401);
         throw new Error('User not found');
