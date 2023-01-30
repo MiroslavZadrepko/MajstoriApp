@@ -1,4 +1,4 @@
-import { Redirect } from "react-router";
+import { Navigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const LogOut = ({ setUser, isLoged, setIsLoged, isAdmin, setIsAdmin }) => {
@@ -22,7 +22,7 @@ const LogOut = ({ setUser, isLoged, setIsLoged, isAdmin, setIsAdmin }) => {
 
     return (
         <>
-            {isLoged ? <h2 style={{width: '48vw', marginLeft: '5vw', marginRight: '10vw'}}>Hvala i vratite se opet</h2> : <Redirect to='/' />}
+            {isLoged ? <h2 style={{width: '48vw', marginLeft: '5vw', marginRight: '10vw'}}>Hvala i vratite se opet</h2> : <Navigate to='/' />}
         </>
     );
 }

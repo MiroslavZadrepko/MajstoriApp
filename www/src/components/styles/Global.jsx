@@ -41,18 +41,6 @@ a:hover {
     border: 2px solid #777777;
 };
 
-input{
-    border: solid #777777;
-    height: 50px;
-    text-align:center;
-    border-radius: 25px;
-    margin-right:15vw;
-
-    ::placeholder{
-        text-align:center;
-    };
-};
-
 input:focus{
         border-color: #002E52;
         outline:none;

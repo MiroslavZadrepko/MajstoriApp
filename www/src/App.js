@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./components/Home";
 import LogIn from "./components/LogIn";
 import Register from "./components/Register";
@@ -34,27 +34,14 @@ function App() {
             {isAdmin && !isLoged ? <Link to="/Admin" /> : ''}
           </MainNavStyled>
 
-          <Switch>
-            <Route exact path="/">
-              <Home user={user} isLoged={isLoged} searchTerm={searchTerm} setSearchTerm={setSearchTerm} isVisible={isVisible} setIsVisible={setIsVisible} />
-            </Route>
-            <Route exact path="/logout">
-              <LogOut setUser={setUser} user={user} isLoged={isLoged} setIsLoged={setIsLoged} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
-            </Route>
-            <Route exact path="/login">
-              <LogIn setUser={setUser} user={user} isLoged={isLoged} setIsLoged={setIsLoged} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
-            </Route>
-            <Route exact path="/register">
-              <Register setUser={setUser} user={user} />
-            </Route>
-            <Route exact path="/AddCraftsman">
-              <AddCraftsman isLoged={isLoged} />
-            </Route>
-            <Route exact path="/Admin">
-              <Admin />
-            </Route>
-
-          </Switch>
+          <Routes>
+            <Route exact path="/" element={ <Home user={user} isLoged={isLoged} searchTerm={searchTerm} setSearchTerm={setSearchTerm} isVisible={isVisible} setIsVisible={setIsVisible} />}/>
+            <Route exact path="/logout" element={<LogOut setUser={setUser} user={user} isLoged={isLoged} setIsLoged={setIsLoged} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
+            <Route exact path="/login" element={<LogIn setUser={setUser} user={user} isLoged={isLoged} setIsLoged={setIsLoged} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
+            <Route exact path="/register" element={<Register setUser={setUser} user={user} />}/>
+            <Route exact path="/AddCraftsman" element={<AddCraftsman isLoged={isLoged} />} />
+            <Route exact path="/Admin" element={ <Admin />} />
+          </Routes>
         </Router>
 
       </div>

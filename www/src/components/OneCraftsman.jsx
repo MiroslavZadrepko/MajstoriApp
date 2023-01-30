@@ -1,4 +1,4 @@
-import { Redirect, useParams } from "react-router";
+import { Navigate, useParams } from "react-router";
 import Review from "./Review";
 import { OneCraftDivStyled } from "./styles/OneCraftDiv.styled"
 
@@ -27,7 +27,7 @@ const OneCraftsman = ({ craftsmans, isLoged }) => {
             </OneCraftDivStyled>
 
         </>
-        : <Redirect to='/Craftsmans' />
+        : <Navigate to='/Craftsmans' />
 }
 
 export default OneCraftsman;
