@@ -46,12 +46,5 @@ input:focus{
         outline:none;
     };
 
-h2 {
-    margin-top: 25px;
-    margin-bottom: 5px;
-    margin-left: 5vw;
-    color: #012D52;
-    text-align: center;
-}
 `
 export default GlobalStyles;

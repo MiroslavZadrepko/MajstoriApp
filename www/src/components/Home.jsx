@@ -1,8 +1,8 @@
 import Craftsmans from "./Craftsmans"
 import { getAllCraftsmans } from "../service.js"
 import { useState, useEffect } from "react"
-import { SearchInput } from "./styles/SearchInput.styled"
 import Toggle from "./Toggle"
+import { Box, TextField } from "@mui/material"
 
 const Home = ({ isLoged, searchTerm, setSearchTerm, isVisible }) => {
 
@@ -19,21 +19,29 @@ const Home = ({ isLoged, searchTerm, setSearchTerm, isVisible }) => {
 
     return (
         <>
-            <div>
+            <Box component='div'
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+
                 <div>
                     <h2>Nađite dobrog majstora sa preporukom i ocenom.</h2>
                 </div>
 
-                <SearchInput
+                <TextField
+                    variant="filled"
                     type="text"
                     value={searchTerm}
-                    placeholder="Pronađite majstora"
+                    label='Unesite profesiju majstora'
                     onChange={(e) => { setSearchTerm(e.target.value) }} />
 
                 {searchTerm != '' ? <Craftsmans craftsmans={filtrirani} isLoged={isLoged} /> : ''}
 
                 {isVisible && <Toggle />}
-            </div>
+            </Box>
         </>
     );
 }

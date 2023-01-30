@@ -46,42 +46,46 @@ const Register = ({ setUser, user }) => {
 
     return (
 
-        <Box 
-        component="form"
-        sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center'
-        }}
-        onSubmit={handleSubmit} >
+        <Box
+            component="form"
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                '& .MuiTextField-root': { m: 1, mt: 5, width: '25ch' },
+            }}
+            onSubmit={handleSubmit} >
 
-                <TextField
-                    type="text"
-                    name="user_name"
-                    label='Unesite korisničko ime'
-                    value={newUser.user_name}
-                    onChange={handleChange}
-                    required
-                />
-                <TextField
-                    type="email"
-                    name="user_email"
-                    label="Unesite e-mail"
-                    value={newUser.user_email}
-                    onChange={handleChange}
-                    required
-                />
-                <TextField                 
-                    type="password"
-                    name="user_password"
-                    label="Unesite šifru"
-                    value={newUser.user_password}
-                    onChange={handleChange}
-                    required
-                />
+            <TextField
+                variant="filled"
+                type="text"
+                name="user_name"
+                label='Unesite korisničko ime'
+                value={newUser.user_name}
+                onChange={handleChange}
+                required
+            />
+            <TextField
+                variant="filled"
+                type="email"
+                name="user_email"
+                label="Unesite e-mail"
+                value={newUser.user_email}
+                onChange={handleChange}
+                required
+            />
+            <TextField
+                variant="filled"
+                type="password"
+                name="user_password"
+                label="Unesite šifru"
+                value={newUser.user_password}
+                onChange={handleChange}
+                required
+            />
             <br />
-            <Button type="submit" variant="outlined">Registrujte se</Button>
+            <Button variant="contained" type="submit">Registrujte se</Button>
         </Box>
 
     );
