@@ -4,7 +4,9 @@ const TmpReview = require('../models/tmpReviewModel');
 const User = require('../models/userModel');
 const Craftsman = require('../models/craftsmanModel')
 
-/**  */
+/** POST api/tmp 
+ * 
+ */
 const addTmpCraftsman = asyncHandler(async (req, res) => {
     
     const { craftsman_name, craftsman_last_name, craftsman_professionion, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev } = req.body;
@@ -53,7 +55,9 @@ const addTmpCraftsman = asyncHandler(async (req, res) => {
     }
 });
 
-/** */
+/** POST api/tmp/:id
+ * 
+*/
 const addTmpReviw = asyncHandler(async (req, res) => {
 
     const { revTxt, revCraftID } = req.body;
