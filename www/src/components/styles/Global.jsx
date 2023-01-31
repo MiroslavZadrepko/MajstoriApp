@@ -23,26 +23,10 @@ body{
     margin-top: 5vh;
 }
 
-a {
-    border: 2px solid #002E52;
-    padding: 2vh 4vw;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 25px;
-    color: #002E52;
-    display: flex; 
-    max-width: 50vh;
-    background-color: #DDF1FA;
-};
 
-a:hover {
-    color: white;
-    background-color: #777777;
-    border: 2px solid #777777;
-};
 
 input:focus{
-        border-color: #002E52;
+        color: #777777;
         outline:none;
     };
 
