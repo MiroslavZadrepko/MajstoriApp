@@ -1,7 +1,6 @@
 import Craftsmans from "./Craftsmans"
 import { getAllCraftsmans } from "../service.js"
 import { useState, useEffect } from "react"
-import Toggle from "./Toggle"
 import { Box, TextField } from "@mui/material"
 
 const Home = ({ isLoged, searchTerm, setSearchTerm, isVisible }) => {
@@ -40,7 +39,6 @@ const Home = ({ isLoged, searchTerm, setSearchTerm, isVisible }) => {
 
                 {searchTerm != '' ? <Craftsmans craftsmans={filtrirani} isLoged={isLoged} /> : ''}
 
-                {isVisible && <Toggle />}
             </Box>
         </>
     );

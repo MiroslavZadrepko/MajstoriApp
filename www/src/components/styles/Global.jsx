@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
 
 body{
     height: 100vh;
-    background-image: url('../CraftApp/pozadin4.jpg');
+    background-image: url('../pozadin4.jpg');
     background-size: cover;
 }
 
@@ -22,13 +22,6 @@ body{
     float: left;
     margin-top: 5vh;
 }
-
-
-
-input:focus{
-        color: #777777;
-        outline:none;
-    };
 
 `
 export default GlobalStyles;
