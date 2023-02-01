@@ -53,7 +53,7 @@ const Register = ({ setUser, user }) => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                '& .MuiTextField-root': { m: 1, mt: 5, width: '25ch' },
+                m:5
             }}
             onSubmit={handleSubmit} >
 

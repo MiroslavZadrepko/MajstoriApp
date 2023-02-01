@@ -3,7 +3,7 @@ import { getAllCraftsmans } from "../service.js"
 import { useState, useEffect } from "react"
 import { Box, TextField } from "@mui/material"
 
-const Home = ({ isLoged, searchTerm, setSearchTerm, isVisible }) => {
+const Home = ({ isLoged, searchTerm, setSearchTerm }) => {
 
     const [craftsmans, setCraftsmans] = useState([])
 

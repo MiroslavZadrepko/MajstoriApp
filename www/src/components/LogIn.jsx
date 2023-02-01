@@ -33,7 +33,7 @@ const LogIn = ({ setUser, isLoged, setIsLoged, isAdmin, setIsAdmin }) => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                '& .MuiTextField-root': { mt: 5, width: '25ch' },
+                m: 5,
             }}
             onSubmit={handleSubmit}
         >

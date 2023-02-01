@@ -8,6 +8,8 @@ import AddCraftsman from "./components/AddCraftsman";
 import LogOut from "./components/LogOut";
 import Admin from "./components/Admin";
 import GlobalStyles from "./components/styles/Global";
+import { createTheme, ThemeProvider } from '@mui/material';
+import { borderRadius } from "@mui/system";
 
 function App() {
 
@@ -16,14 +18,30 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const theme = createTheme({
+    components: {
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            width: '45%',
+            margin: '1%',
+            backgroundColor: '#C8e9f7',
+            opacity: '.6',
+            borderRadius: '7px',
+          },
+        },
+      },
+    },
+  });
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyles />
-      
+
       <div className="container">
         <Router basename="/" >
 
-          <Navigation isLoged={isLoged} isAdmin={isAdmin}/>
+          <Navigation isLoged={isLoged} isAdmin={isAdmin} />
 
           <Routes>
             <Route exact path="/" element={<Home user={user} isLoged={isLoged} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />} />
@@ -33,10 +51,10 @@ function App() {
             <Route exact path="/AddCraftsman" element={<AddCraftsman isLoged={isLoged} />} />
             <Route exact path="/Admin" element={<Admin />} />
           </Routes>
-        
+
         </Router>
-      </div>      
-    </>
+      </div>
+    </ThemeProvider>
   );
 }
 
