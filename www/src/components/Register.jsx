@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 import { addUser, reset } from '../features/auth/authSlice';
 import Spiner from './Spiner';
 
-
 const Register = () => {
 
     const [newUser, setNewUser] = useState({
@@ -20,7 +19,7 @@ const Register = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => auth.state);
+    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
     useEffect(() => {
         if (isError) { toast.error(message) }
@@ -38,21 +37,13 @@ const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const emailExists = async () => await db.users.findOne({ user_email: newUser.user_email });
-        const passExists = async () => await db.users.findOne({ user_password: newUser.user_password });
+        const user = {
+            user_name,
+            user_email,
+            user_password
+        };
+        dispatch(addUser(user));
 
-        if (emailExists) {
-            toast.error('e-mail already exist')
-        } else if (passExists) {
-            toast.error('password already exist')
-        } else {
-            const user = {
-                user_name,
-                user_email,
-                user_password
-            };
-            dispatch(addUser(user));
-        }
     }
 
     if (isLoading) {

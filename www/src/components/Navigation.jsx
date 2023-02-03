@@ -41,7 +41,7 @@ function Navigation({ isAdmin }) {
         to='/'
         component={RouterLink} />
 
-      {user || isAdmin ?
+      {user.user || isAdmin ?
         <Tab onClick={onLogout}
           label='Logout'
           value='/logout'
@@ -53,7 +53,7 @@ function Navigation({ isAdmin }) {
           component={RouterLink}
           to="/login" />}
 
-      {!user ?
+      {!user.user ?
         <Tab
           label='Registracija'
           value='/register'
@@ -61,7 +61,7 @@ function Navigation({ isAdmin }) {
           to="/register" /> :
         ''}
       
-      {user && !isAdmin ?
+      {user.user && !isAdmin ?
         <Tab
           label='Dodaj majstora'
           value='/AddCraftsman'
@@ -69,7 +69,7 @@ function Navigation({ isAdmin }) {
           to="/AddCraftsman" /> :
         ''}
       
-      {isAdmin && !user ?
+      {isAdmin && !user.user ?
         <Tab
           label='Admin'
           value='/Admin'
