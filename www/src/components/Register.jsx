@@ -7,7 +7,7 @@ import { addUser, reset } from '../features/auth/authSlice';
 import Spiner from './Spiner';
 
 
-const Register = ({ setUser }) => {
+const Register = () => {
 
     const [newUser, setNewUser] = useState({
         user_name: "",
@@ -77,7 +77,7 @@ const Register = ({ setUser }) => {
                 type="text"
                 name="user_name"
                 label='Unesite korisničko ime'
-                value={newUser.user_name}
+                value={user_name}
                 onChange={handleChange}
                 required
             />
@@ -86,7 +86,7 @@ const Register = ({ setUser }) => {
                 type="email"
                 name="user_email"
                 label="Unesite e-mail"
-                value={newUser.user_email}
+                value={user_email}
                 onChange={handleChange}
                 required
             />
@@ -95,7 +95,7 @@ const Register = ({ setUser }) => {
                 type="password"
                 name="user_password"
                 label="Unesite šifru"
-                value={newUser.user_password}
+                value={user_password}
                 onChange={handleChange}
                 required
             />
