@@ -1,8 +1,14 @@
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Tab, Tabs } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout, reset } from '../features/auth/authSlice'
 
-function Navigation({ isLoged, isAdmin }) {
+function Navigation({ isAdmin }) {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth)
 
   const [value, setValue] = useState('/');
 
@@ -17,18 +23,26 @@ function Navigation({ isLoged, isAdmin }) {
     else if (path === "/register" && value !== 2) setValue('/register');
   }, [value,]);
 
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    navigate('/');
+  }
+  
   return (
     <Tabs
       value={value}
       onChange={handleChange}
       centered>
+
       <Tab
         label='Home'
         value='/'
         to='/'
         component={RouterLink} />
-      {isLoged || isAdmin ?
-        <Tab
+
+      {user || isAdmin ?
+        <Tab onClick={onLogout}
           label='Logout'
           value='/logout'
           component={RouterLink}
@@ -38,27 +52,31 @@ function Navigation({ isLoged, isAdmin }) {
           value='/login'
           component={RouterLink}
           to="/login" />}
-      {!isLoged ?
+
+      {!user ?
         <Tab
           label='Registracija'
           value='/register'
           component={RouterLink}
           to="/register" /> :
         ''}
-      {isLoged && !isAdmin ?
+      
+      {user && !isAdmin ?
         <Tab
           label='Dodaj majstora'
           value='/AddCraftsman'
           component={RouterLink}
           to="/AddCraftsman" /> :
         ''}
-      {isAdmin && !isLoged ?
+      
+      {isAdmin && !user ?
         <Tab
           label='Admin'
           value='/Admin'
           component={RouterLink}
           to="/Admin" /> :
         ''}
+
     </Tabs>
   )
 }
