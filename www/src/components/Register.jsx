@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Box, TextField, Button } from '@mui/material/';
 import { toast } from 'react-toastify';
-import authSlice, { addUser, reset } from '../features/auth/authSlice';
+import { addUser, reset } from '../features/auth/authSlice';
+import Spiner from './Spiner';
 
 
 const Register = ({ setUser }) => {
@@ -21,7 +22,11 @@ const Register = ({ setUser }) => {
 
     const { user, isLoading, isError, isSuccess, message } = useSelector((state) => auth.state);
 
-    
+    useEffect(() => {
+        if (isError) { toast.error(message) }
+        if (isSuccess || user) { navigate('/') }
+        dispatch(reset())
+    }, [user, isError, isSuccess, message, dispatch, navigate])
 
     const handleChange = (e) => {
         setNewUser((newUser) => ({
@@ -33,13 +38,8 @@ const Register = ({ setUser }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const emailExists = async () => await db.users.findOne({
-            user_email: newUser.user_email
-        });
-
-        const passExists = async () => await db.users.findOne({
-            user_password: newUser.user_password
-        });
+        const emailExists = async () => await db.users.findOne({ user_email: newUser.user_email });
+        const passExists = async () => await db.users.findOne({ user_password: newUser.user_password });
 
         if (emailExists) {
             toast.error('e-mail already exist')
@@ -53,6 +53,10 @@ const Register = ({ setUser }) => {
             };
             dispatch(addUser(user));
         }
+    }
+
+    if (isLoading) {
+        return <Spiner />
     }
 
     return (
