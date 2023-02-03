@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import Navigation from "./components/Navigation";
 import Home from "./components/Home";
 import LogIn from "./components/LogIn";
@@ -9,11 +11,9 @@ import LogOut from "./components/LogOut";
 import Admin from "./components/Admin";
 import GlobalStyles from "./components/styles/Global";
 import { createTheme, ThemeProvider } from '@mui/material';
-import { borderRadius } from "@mui/system";
 
 function App() {
 
-  const [user, setUser] = useState(null);
   const [isLoged, setIsLoged] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -44,15 +44,16 @@ function App() {
           <Navigation isLoged={isLoged} isAdmin={isAdmin} />
 
           <Routes>
-            <Route exact path="/" element={<Home user={user} isLoged={isLoged} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />} />
-            <Route exact path="/logout" element={<LogOut setUser={setUser} user={user} isLoged={isLoged} setIsLoged={setIsLoged} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
-            <Route exact path="/login" element={<LogIn setUser={setUser} user={user} isLoged={isLoged} setIsLoged={setIsLoged} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
-            <Route exact path="/register" element={<Register setUser={setUser} user={user} />} />
+            <Route exact path="/" element={<Home isLoged={isLoged} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />} />
+            <Route exact path="/logout" element={<LogOut isLoged={isLoged} setIsLoged={setIsLoged} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
+            <Route exact path="/login" element={<LogIn isLoged={isLoged} setIsLoged={setIsLoged} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
+            <Route exact path="/register" element={<Register />} />
             <Route exact path="/AddCraftsman" element={<AddCraftsman isLoged={isLoged} />} />
             <Route exact path="/Admin" element={<Admin />} />
           </Routes>
 
         </Router>
+        <ToastContainer />
       </div>
     </ThemeProvider>
   );

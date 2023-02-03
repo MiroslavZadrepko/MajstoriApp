@@ -1,8 +1,12 @@
 import { useState } from 'react';
-import { addUser, getAllUsers } from '../service';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Box, TextField, Button } from '@mui/material/';
+import { toast } from 'react-toastify';
+import authSlice, { addUser, reset } from '../features/auth/authSlice';
 
-const Register = ({ setUser, user }) => {
+
+const Register = ({ setUser }) => {
 
     const [newUser, setNewUser] = useState({
         user_name: "",
@@ -10,38 +14,45 @@ const Register = ({ setUser, user }) => {
         user_password: ""
     })
 
+    const { user_name, user_email, user_password } = newUser;
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => auth.state);
+
+    
+
     const handleChange = (e) => {
-        const value = e.target.value;
-        setNewUser({
+        setNewUser((newUser) => ({
             ...newUser,
-            [e.target.name]: value
-        });
+            [e.target.name]: e.target.value,
+        }));
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        /*
-                const user = { user_name, user_email, user_password };
-                const respons = fetch('/api/user', {
-                    method: POST,
-                    body: JSON.stringify(user),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-        */
-        getAllUsers().then(res => {
 
-            if (!res.data.some(user => user.user_password == newUser.user_password || user.user_email == newUser.user_email)) {
-                addUser(newUser.user_name, newUser.user_email, newUser.user_password)
-                    .then(res => {
-                        setUser(res.data)
-                    }
-                    )
-            }
-            //gde se preusmerava, ubaciti isLoged=True
-            //da ispiše grešku
-        })
+        const emailExists = async () => await db.users.findOne({
+            user_email: newUser.user_email
+        });
+
+        const passExists = async () => await db.users.findOne({
+            user_password: newUser.user_password
+        });
+
+        if (emailExists) {
+            toast.error('e-mail already exist')
+        } else if (passExists) {
+            toast.error('password already exist')
+        } else {
+            const user = {
+                user_name,
+                user_email,
+                user_password
+            };
+            dispatch(addUser(user));
+        }
     }
 
     return (
@@ -53,7 +64,7 @@ const Register = ({ setUser, user }) => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                m:5
+                m: 5
             }}
             onSubmit={handleSubmit} >
 

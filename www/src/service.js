@@ -1,31 +1,43 @@
 import axios from 'axios';
 
-const USER_URL = `http://localhost:8080/api/user`;
+const USER_URL = '/api/user/';
 
 //user services 
 
-export const getAllCraftsmans = () => axios.get(`http://localhost:8080/majstori`)
+const addUser = async (user) => {
+    
+    const response = await axios.post(USER_URL, user);
 
-export const addUser = async (user_name, user_email, user_password) => {
-    const response = await axios.post(USER_URL, { user_name, user_email, user_password });
+    if (response.data) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+    }
     return response.data;
 }
 
-export const addTmpCraftsman = (craftsman_name, craftsman_last_name, craftsman_profession, craftsman_city,craftsman_email, craftsman_phone, craftsman_rev) => axios.post(`http://localhost:8080/tmp`, { craftsman_name, craftsman_last_name, craftsman_profession, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev })
+const getAllCraftsmans = () => axios.get(`http://localhost:8080/craftsmen`)
 
-export const addTmpReview = (rewTxt, rewCraftID) => axios.post(`http://localhost:8080/tmpRew`, { rewTxt, rewCraftID })
+const getAllUsers = () => axios.get(USER_URL)
+
+const addTmpCraftsman = (craftsman_name, craftsman_last_name, craftsman_profession, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev) => axios.post(`http://localhost:8080/tmpcraftsmen`, { craftsman_name, craftsman_last_name, craftsman_profession, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev })
+
+const addTmpReview = (rewTxt, rewCraftID) => axios.post(`http://localhost:8080/tmpreviews`, { rewTxt, rewCraftID })
+
 
 
 /**admin services */
-export const getAllUsers = () => axios.get(`http://localhost:8080/users`)
+const getTmpCraftsman = () => axios.get(`http://localhost:8080/tmpcraftsmen`)
 
-export const getTmpCraftsman = () => axios.get(`http://localhost:8080/tmp`)
+const delTempCraftsman = (id) => axios.delete(`http://localhost:8080/tmpcraftsmen/${id}`)
 
-export const delTempCraftsman = (id) => axios.delete(`http://localhost:8080/tmp/${id}`)
+const addCraftsman = (craftsman_name, craftsman_last_name, craftsman_profession, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev) => axios.post(`http://localhost:8080/craftsmen`, { craftsman_name, craftsman_last_name, craftsman_profession, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev })
 
-export const addCraftsman = (craftsman_name, craftsman_last_name, craftsman_profession, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev) => axios.post(`http://localhost:8080/majstori`, { craftsman_name, craftsman_last_name, craftsman_profession, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev }) 
+const getTmpReview = () => axios.get(`http://localhost:8080/tmpreviews`)
 
-export const getTmpReview = () => axios.get(`http://localhost:8080/tmpRew`)
-
-export const delTmpReview = (id) => axios.delete(`http://localhost:8080/tmpRew/${id}`)
+const delTmpReview = (id) => axios.delete(`http://localhost:8080/tmpreviews/${id}`)
 /** ADD REVIEW!!!!!!!!!!!!! */
+
+const services = {
+    addUser,
+}
+
+export default services

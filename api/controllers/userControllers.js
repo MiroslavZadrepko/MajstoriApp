@@ -20,8 +20,10 @@ const addUser = asyncHandler(async (req, res) => {
     //check if user exists 
     const userExists = await User.findOne({ user_email })
     if (userExists) {
+        console.log('that email is registered');
         res.status(400);
         throw new Error('that email is registered');
+        
     }
 
     //hashing the pass 
