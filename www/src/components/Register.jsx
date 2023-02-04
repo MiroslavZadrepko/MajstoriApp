@@ -43,7 +43,6 @@ const Register = () => {
             user_password
         };
         dispatch(addUser(user));
-
     }
 
     if (isLoading) {

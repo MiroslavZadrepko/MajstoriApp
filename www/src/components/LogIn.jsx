@@ -1,20 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { getAllUsers } from "../service";
 import { Box, TextField, Button } from '@mui/material/';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { login, reset } from '../features/auth/authSlice';
+import Spiner from './Spiner';
 
-const LogIn = ({ setUser, isLoged, setIsLoged, isAdmin, setIsAdmin }) => {
+const LogIn = ({ isAdmin }) => {
 
-    const [userMail, setUserMail] = useState()
-    const [userPass, setUserPass] = useState()
+    const [loginUser, setLoginUser] = useState({
+        user_email: "",
+        user_password: ""
+    })
+
+    const { user_email, user_password } = loginUser;
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        if (isError) { toast.error(message) }
+        if (isSuccess || user) { navigate('/') }
+        dispatch(reset())
+    }, [user, isError, isSuccess, message, dispatch, navigate]);
+
+    const handleChange = (e) => {
+        setLoginUser((loginUser) => ({
+            ...loginUser,
+            [e.target.name]: e.target.value,
+        }));
+    };
 
     const handleSubmit = (e) => {
+        e.preventDefault();
 
-        e.preventDefault()
-        getAllUsers().then(res => {
+        const user = {
+            user_email,
+            user_password
+        };
+        dispatch(login(user));
 
-            let activeUser = res.data.find(el => el.user_email == userMail && el.user_password == userPass)
-
+        /*
+     
             if (activeUser.admin) {
                 setIsAdmin(prev => !prev)
                 setIsLoged(prev => !prev)
@@ -22,7 +52,11 @@ const LogIn = ({ setUser, isLoged, setIsLoged, isAdmin, setIsAdmin }) => {
                 setUser(activeUser);
                 setIsLoged(prev => !prev)
             }
-        })
+        */
+    }
+
+    if (isLoading) {
+        return <Spiner />
     }
 
     return (
@@ -40,19 +74,24 @@ const LogIn = ({ setUser, isLoged, setIsLoged, isAdmin, setIsAdmin }) => {
             <TextField
                 variant="filled"
                 type="email"
+                name="user_email"
                 label="unesite e-mail"
+                value={user_email}
+                onChange={handleChange}
                 required
-                onChange={(e) => { setUserMail(e.target.value) }}
             />
             <TextField
                 variant="filled"
                 type="password"
-                label="unsesite šifru" required
-                onChange={(e) => { setUserPass(e.target.value) }}
+                name="user_password"
+                label="unsesite šifru"
+                value={user_password}
+                onChange={handleChange}
+                required
             />
             <br />
             <Button variant="contained" type="submit">Ulogujte se</Button>
-            {isAdmin ? <Navigate to='/Admin' /> : isLoged ? <Navigate to='/' /> : ''}
+            {isAdmin ? <Navigate to='/Admin' /> : ''}
         </Box>
     )
 }

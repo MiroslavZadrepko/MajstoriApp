@@ -22,8 +22,7 @@ const addUser = asyncHandler(async (req, res) => {
     if (userExists) {
         console.log('that email is registered');
         res.status(400);
-        throw new Error('that email is registered');
-        
+        throw new Error('that email is registered');  
     }
 
     //hashing the pass 
@@ -53,7 +52,7 @@ const addUser = asyncHandler(async (req, res) => {
 /** login nad auth user
  *  POST api/user/login
  */
-const loginUser = asyncHandler(async (req, res) => {
+const login = asyncHandler(async (req, res) => {
 
     const { user_email, user_password } = req.body;
 
@@ -90,7 +89,8 @@ const generateToken = (id) => {
         expiresIn: '7d'
     })
 }
-/** Get all craftsman, needs to be done
+
+/** Get all craftsman, needs to be done!!!!!!!!!!
  * GET
  */
 const getAllCraftsmans = asyncHandler(async (req, res) => {
@@ -100,7 +100,7 @@ const getAllCraftsmans = asyncHandler(async (req, res) => {
 
 module.exports = {
     addUser,
-    loginUser,
+    login,
     getMe,
     getAllCraftsmans,
 };

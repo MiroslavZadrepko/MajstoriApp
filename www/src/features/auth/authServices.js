@@ -11,15 +11,28 @@ const addUser = async (user) => {
         localStorage.setItem('user', JSON.stringify(response.data));
     }
     return response.data;
-}
+};
+
+//login user
+
+const login = async (user) => {
+    
+    const response = await axios.post(USER_URL + 'login', user);
+    if (response.data) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+    }
+    return response.data;
+};
 
 //logout user
 const logout = () => {
     localStorage.removeItem('user');
-}
+};
+
 const services = {
     addUser,
+    login,
     logout
-}
+};
 
 export default services;
