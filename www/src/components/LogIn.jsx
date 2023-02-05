@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
 import { Box, TextField, Button } from '@mui/material/';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -7,11 +6,11 @@ import { toast } from 'react-toastify';
 import { login, reset } from '../features/auth/authSlice';
 import Spiner from './Spiner';
 
-const LogIn = ({ isAdmin }) => {
+const LogIn = () => {
 
     const [loginUser, setLoginUser] = useState({
         user_email: "",
-        user_password: ""
+        user_password: "",
     })
 
     const { user_email, user_password } = loginUser;
@@ -22,8 +21,10 @@ const LogIn = ({ isAdmin }) => {
     const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
     useEffect(() => {
+        
         if (isError) { toast.error(message) }
-        if (isSuccess || user) { navigate('/') }
+        if (isSuccess && user && !user.admin) { navigate('/') }
+        if (isSuccess && user && user.admin) { navigate('/Admin') }
         dispatch(reset())
     }, [user, isError, isSuccess, message, dispatch, navigate]);
 
@@ -39,20 +40,9 @@ const LogIn = ({ isAdmin }) => {
 
         const user = {
             user_email,
-            user_password
+            user_password,
         };
         dispatch(login(user));
-
-        /*
-     
-            if (activeUser.admin) {
-                setIsAdmin(prev => !prev)
-                setIsLoged(prev => !prev)
-            } else if (activeUser) {
-                setUser(activeUser);
-                setIsLoged(prev => !prev)
-            }
-        */
     }
 
     if (isLoading) {
@@ -91,7 +81,6 @@ const LogIn = ({ isAdmin }) => {
             />
             <br />
             <Button variant="contained" type="submit">Ulogujte se</Button>
-            {isAdmin ? <Navigate to='/Admin' /> : ''}
         </Box>
     )
 }

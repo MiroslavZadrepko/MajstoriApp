@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/auth/authSlice'
 
-function Navigation({ isAdmin }) {
+function Navigation() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -17,11 +17,15 @@ function Navigation({ isAdmin }) {
   };
 
   useEffect(() => {
-    let path = window.location.pathname;
-    if (path === "/" && value !== 0) setValue('/');
+    let path = window.location.pathname; 
+    
+    if (user.user && !user.user.admin && path === "/" && value !== 0) setValue('/');
+    else if (user.user && !user.user.admin && path === "/logout" && value !== 1) setValue('/logout');
+    else if (user.user && !user.user.admin && path === "/addcraftsman" && value !== 2) setValue('/addcraftsman');
+    else if (path === "/" && value !== 0) setValue('/');
     else if (path === "/login" && value !== 1) setValue('/login');
     else if (path === "/register" && value !== 2) setValue('/register');
-  }, [value,]);
+  }, [value, user]);
 
   const onLogout = () => {
     dispatch(logout());
@@ -41,7 +45,7 @@ function Navigation({ isAdmin }) {
         to='/'
         component={RouterLink} />
 
-      {user.user || isAdmin ?
+      {user.user || user.admin ?
         <Tab onClick={onLogout}
           label='Logout'
           value='/logout'
@@ -61,20 +65,20 @@ function Navigation({ isAdmin }) {
           to="/register" /> :
         ''}
       
-      {user.user && !isAdmin ?
+      {user.user && !user.user.admin ?
         <Tab
           label='Dodaj majstora'
-          value='/AddCraftsman'
+          value='/addcraftsman'
           component={RouterLink}
-          to="/AddCraftsman" /> :
+          to="/addcraftsman" /> :
         ''}
       
-      {isAdmin && !user.user ?
+      {user.user && user.user.admin ?
         <Tab
           label='Admin'
-          value='/Admin'
+          value='/admin'
           component={RouterLink}
-          to="/Admin" /> :
+          to="/admin" /> :
         ''}
 
     </Tabs>
