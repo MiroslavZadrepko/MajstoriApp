@@ -12,9 +12,7 @@ MERN, Styled Components, MUI, React Router, Git, VS Code
 
 ## ToDo
 Convert to MERN + redux fully, 
-    register is mostlly done, some issues with navigation still needs to be done,
-    working on: login, 
-    to do: add craftsman, add review, admin funcionality
+add craftsman, add review, admin funcionality,
 translation to english, 
 responsivnes. 
 

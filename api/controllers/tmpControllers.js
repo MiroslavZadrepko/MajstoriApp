@@ -4,24 +4,22 @@ const TmpReview = require('../models/tmpReviewModel');
 const User = require('../models/userModel');
 const Craftsman = require('../models/craftsmanModel')
 
-/** POST api/tmp 
- * 
- */
+// POST api/tmp 
 const addTmpCraftsman = asyncHandler(async (req, res) => {
-    
+
     const { craftsman_name, craftsman_last_name, craftsman_professionion, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev } = req.body;
 
     //check if all fields ar ok
     if (!craftsman_name || !craftsman_last_name || !craftsman_professionion || !craftsman_city || !craftsman_phone) {
-        res.status(400);
-        throw new Error('Fill all required fields, pls')
+        res.status(400).json({message: 'Please, fill up the form'});
+        throw new Error('Please, fill up the form')
     }
 
     //check if craftsman exists
     const craftsmanExists = await Craftsman.findOne({ craftsman_phone })
     const tmpCrafstmanExists = await TmpCraftsman.findOne({ craftsman_phone })
     if (craftsmanExists || tmpCrafstmanExists) {
-        res.status(400);
+        res.status(400).json({message: 'Craftsman with that phonenumber already exists'});
         throw new Error('Craftsman with that phonenumber already exists')
     }
 
@@ -34,6 +32,7 @@ const addTmpCraftsman = asyncHandler(async (req, res) => {
         craftsman_city: req.body.craftsman_city,
         craftsman_email: req.body.craftsman_email,
         craftsman_phone: req.body.craftsman_phone,
+        craftsman_rev: [],
         user
     });
 
@@ -50,14 +49,12 @@ const addTmpCraftsman = asyncHandler(async (req, res) => {
             user: tmpCraftsman.user,
         })
     } else {
-        res.status(400);
+        res.status(400).json({message: 'Invalid data'});
         throw new Error('Invalid data')
     }
 });
 
-/** POST api/tmp/:id
- * 
-*/
+// POST api/tmp/:id
 const addTmpReviw = asyncHandler(async (req, res) => {
 
     const { revTxt, revCraftID } = req.body;

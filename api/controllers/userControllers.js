@@ -13,15 +13,14 @@ const addUser = asyncHandler(async (req, res) => {
 
     //check if all fields are filled 
     if (!user_name || !user_email || !user_password) {
-        res.status(400);
-        throw new Error('fill up the form, pls');
+        res.status(400).json({message: 'Please, fill up the form' });
+        throw new Error('Please, fill up the form');
     }
 
     //check if user exists 
     const userExists = await User.findOne({ user_email })
     if (userExists) {
-        console.log('that email is registered');
-        res.status(400);
+        res.status(400).json({message: 'That email is registered'});
         throw new Error('that email is registered');  
     }
 
@@ -33,7 +32,8 @@ const addUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         user_name,
         user_email,
-        user_password: hashedPass
+        user_password: hashedPass,
+        admin: false,
     });
 
     if (user) {
@@ -41,11 +41,12 @@ const addUser = asyncHandler(async (req, res) => {
             _id: user.id,
             user_name: user.user_name,
             user_email: user.user_email,
+            admin: user.admin,
             token: generateToken(user._id)
         })
     } else {
-        res.status(400);
-        throw new Error('Invalid data')
+        res.status(400).json({message: 'Invalid data'});
+        throw new Error('Invalid data');
     }
 });
 
@@ -57,7 +58,6 @@ const login = asyncHandler(async (req, res) => {
     const { user_email, user_password } = req.body;
 
     const user = await User.findOne({ user_email });
-    console.log(user.admin);
 
     if (user && (await bcrypt.compare(user_password, user.user_password))) {
         res.json({
@@ -68,7 +68,7 @@ const login = asyncHandler(async (req, res) => {
             token: generateToken(user._id)
         })
     } else {
-        res.status(400);
+        res.status(400).json({message: 'Invalid data'});
         throw new Error('Invalid data')
     }
 });
@@ -77,13 +77,8 @@ const login = asyncHandler(async (req, res) => {
  * GET api/user/me 
  * private route
  */
-const getMe = asyncHandler(async (req, res) => {
-    const { _id, user_name, user_email } = await User.findById(req.user.id);
-    res.status(200).json({
-        id: _id,
-        user_name,
-        user_email
-    })
+const getMe = asyncHandler(async (req, res) => {   
+    res.status(200).json(req.user)
 });
 
 const generateToken = (id) => {

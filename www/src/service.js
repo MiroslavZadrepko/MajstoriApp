@@ -4,11 +4,9 @@ const USER_URL = '/api/user/';
 
 //user services 
 
-export const getAllCraftsmans = () => axios.get(`http://localhost:8080/craftsmen`)
+//export const getAllCraftsmans = () => axios.get(`http://localhost:8080/craftsmen`)
 
 export const getAllUsers = () => axios.get(USER_URL)
-
-export const addTmpCraftsman = (craftsman_name, craftsman_last_name, craftsman_profession, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev) => axios.post(`http://localhost:8080/tmpcraftsmen`, { craftsman_name, craftsman_last_name, craftsman_profession, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev })
 
 export const addTmpReview = (rewTxt, rewCraftID) => axios.post(`http://localhost:8080/tmpreviews`, { rewTxt, rewCraftID })
 

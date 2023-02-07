@@ -1,5 +1,5 @@
 import Craftsmans from "./Craftsmans"
-import { getAllCraftsmans } from "../service.js"
+//import { getAllCraftsmans } from "../service.js"
 import { useState, useEffect } from "react"
 import { Box, TextField } from "@mui/material"
 
@@ -9,12 +9,13 @@ const Home = ({ isLoged, searchTerm, setSearchTerm }) => {
 
     let filtrirani = craftsmans.filter(craftsman => craftsman.craftsman_profession.includes(searchTerm));
 
-    useEffect(() => {
+    /**    useEffect(() => {
+    
+            getAllCraftsmans().then(res => {
+                setCraftsmans(res.data)
+            })
+        }, [])*/
 
-        getAllCraftsmans().then(res => {
-            setCraftsmans(res.data)
-        })
-    }, [])
 
     return (
         <>
@@ -31,7 +32,7 @@ const Home = ({ isLoged, searchTerm, setSearchTerm }) => {
                 </div>
 
                 <TextField
-                    variant="filled"
+
                     type="text"
                     value={searchTerm}
                     label='Unesite profesiju majstora'

@@ -41,6 +41,7 @@ const LogIn = () => {
         const user = {
             user_email,
             user_password,
+            admin:false
         };
         dispatch(login(user));
     }

@@ -41,19 +41,21 @@ function App() {
       <div className="container">
         <Router basename="/" >
 
-          <Navigation isLoged={isLoged} isAdmin={isAdmin} />
+          <Navigation />
 
           <Routes>
             <Route exact path="/" element={<Home isLoged={isLoged} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />} />
             <Route exact path="/logout" element={<LogOut isLoged={isLoged} setIsLoged={setIsLoged} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
-            <Route exact path="/login" element={<LogIn isLoged={isLoged} setIsLoged={setIsLoged} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
+            <Route exact path="/login" element={<LogIn />} />
             <Route exact path="/register" element={<Register />} />
-            <Route exact path="/AddCraftsman" element={<AddCraftsman isLoged={isLoged} />} />
+            <Route exact path="/AddCraftsman" element={<AddCraftsman />} />
             <Route exact path="/Admin" element={<Admin />} />
           </Routes>
 
         </Router>
+
         <ToastContainer />
+        
       </div>
     </ThemeProvider>
   );
