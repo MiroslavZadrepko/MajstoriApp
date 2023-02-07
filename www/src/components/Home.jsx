@@ -35,7 +35,8 @@ const Home = ({ isLoged, searchTerm, setSearchTerm }) => {
 
                     type="text"
                     value={searchTerm}
-                    label='Unesite profesiju majstora'
+                    label="Unesite profesiju majstora"
+                    variant="filled"
                     onChange={(e) => { setSearchTerm(e.target.value) }} />
 
                 {searchTerm != '' ? <Craftsmans craftsmans={filtrirani} isLoged={isLoged} /> : ''}

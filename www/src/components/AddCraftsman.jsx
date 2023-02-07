@@ -1,12 +1,11 @@
-import { useState } from "react";
-import { useDispatch } from 'react-redux';
-import { Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import { Box, TextField, Button } from '@mui/material/';
-import { createTmpCraftsman } from "../features/craftsman/craftsmanSlice";
+import { createTmpCraftsman, reset } from "../features/craftsman/craftsmanSlice";
 
 const AddCraftsman = () => {
-
-    const dispatch = useDispatch()
 
     const [tmpCraftsman, setTmpCraftsman] = useState({
         craftsman_name: '',
@@ -27,7 +26,24 @@ const AddCraftsman = () => {
         craftsman_phone,
         craftsman_rev } = tmpCraftsman;
 
-    const [sent, setSent] = useState(false);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+
+    const { craftsman, isSuccess, isError, message } = useSelector((state) => state.craftsman)
+
+    useEffect(() => {
+
+        if (isError) { toast.error(message) }
+        if (isSuccess) {
+            toast.success('Craftsman added to tmp base, will be visible after we check him', {
+                position: toast.POSITION.TOP_RIGHT
+            })
+                && navigate('/');
+        }
+        dispatch(reset())
+    }, [craftsman, isError, isSuccess, message, dispatch, navigate])
+
 
     const handleChange = (e) => {
         setTmpCraftsman((tmpCraftsman) => ({
@@ -49,7 +65,6 @@ const AddCraftsman = () => {
             craftsman_rev
         };
         dispatch(createTmpCraftsman(craftsman))
-        setSent(true)
     }
 
     return (
@@ -114,7 +129,6 @@ const AddCraftsman = () => {
 
                 <Button type="submit" variant="contained">Dodaj majstora</Button>
             </Box>
-            {sent ? <Navigate to="/" /> : ''}
         </>
     );
 }

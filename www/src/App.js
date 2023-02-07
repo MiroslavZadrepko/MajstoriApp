@@ -25,9 +25,8 @@ function App() {
           root: {
             width: '45%',
             margin: '1%',
-            backgroundColor: '#C8e9f7',
-            opacity: '.6',
-            borderRadius: '7px',
+            backgroundColor: '#ffffff ',
+            opacity: '.8',
           },
         },
       },
