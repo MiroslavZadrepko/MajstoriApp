@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import OneCraftsman from "./OneCraftsman";
 import { CraftmansDicStyled } from "./styles/CrafmansDiv.styled"
 
-const Craftmans = ({ craftsmans, isLoged }) => {
+const Craftmans = ({ craftsmans}) => {
     
     return (
         <> 
@@ -10,7 +10,7 @@ const Craftmans = ({ craftsmans, isLoged }) => {
                 <CraftmansDicStyled>
                     {craftsmans.map(craftsman => <div key={craftsman.id}><Link to={`/oneCraftsman/${craftsman.id}`}>{craftsman.craftsman_name} {craftsman.craftsman_last_name}, {craftsman.craftsman_profession}</Link></div>)}
                     <Routes>
-                        <Route path="/oneCraftsman/:id" element={<OneCraftsman craftsmans={craftsmans} isLoged={isLoged} />}/>
+                        <Route path="/oneCraftsman/:id" element={<OneCraftsman craftsmans={craftsmans} />}/>
                     </Routes>
                 </CraftmansDicStyled>
             </Router>

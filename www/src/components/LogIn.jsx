@@ -21,7 +21,7 @@ const LogIn = () => {
     const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
     useEffect(() => {
-        
+
         if (isError) { toast.error(message) }
         if (isSuccess && user && !user.admin) { navigate('/') }
         if (isSuccess && user && user.admin) { navigate('/Admin') }
@@ -41,7 +41,7 @@ const LogIn = () => {
         const user = {
             user_email,
             user_password,
-            admin:false
+            admin: false
         };
         dispatch(login(user));
     }

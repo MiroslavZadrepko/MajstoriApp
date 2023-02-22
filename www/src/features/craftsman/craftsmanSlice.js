@@ -12,11 +12,11 @@ const initialState = {
 export const createTmpCraftsman = createAsyncThunk(
     'craftsman/create',
     async (craftsman, thunkAPI) => {
-        try {
-            
+        
+        try {    
             const token = thunkAPI.getState().auth.user.token
-            
             return await services.createTmpCraftsman(craftsman, token);
+
         } catch (error) {
             const message = (
                 error.response &&

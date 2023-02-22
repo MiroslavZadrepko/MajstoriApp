@@ -3,9 +3,12 @@ import Craftsmans from "./Craftsmans"
 import { useState, useEffect } from "react"
 import { Box, TextField } from "@mui/material"
 
-const Home = ({ isLoged, searchTerm, setSearchTerm }) => {
+const Home = () => {
 
     const [craftsmans, setCraftsmans] = useState([])
+    const [searchTerm, setSearchTerm] = useState('');
+
+    //Rešiti find({craftsman_professionion: 'searchterm'})
 
     let filtrirani = craftsmans.filter(craftsman => craftsman.craftsman_profession.includes(searchTerm));
 
@@ -39,7 +42,7 @@ const Home = ({ isLoged, searchTerm, setSearchTerm }) => {
                     variant="filled"
                     onChange={(e) => { setSearchTerm(e.target.value) }} />
 
-                {searchTerm != '' ? <Craftsmans craftsmans={filtrirani} isLoged={isLoged} /> : ''}
+                {searchTerm != '' ? <Craftsmans craftsmans={filtrirani} /> : ''}
 
             </Box>
         </>

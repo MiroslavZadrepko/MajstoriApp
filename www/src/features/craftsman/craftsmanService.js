@@ -9,9 +9,7 @@ const createTmpCraftsman = async (craftsman, token) => {
             Authorization: `Bearer ${token}`
         }
     };
-
     const response = await axios.post(TMP_URL, craftsman, config);
-
     return response.data;
 };
 

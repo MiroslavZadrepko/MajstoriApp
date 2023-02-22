@@ -1,11 +1,19 @@
 const asyncHandler = require('express-async-handler');
+const Craftsman = require('../models/tmpCraftsmanModel')
+
 
 const getAllUsers = asyncHandler(async (req, res) => {
+    
     res.status(200).json({ message: '/api/admin get All Users works' })
 })
-
+/**GET TMP CRAFTSMEN
+ * GET /api/admin/tmpcraftsmen
+ */
 const getTmpCraftsman = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: '/api/admin get Tmp Craftsman works' })
+    const craftsmen = await Craftsman.find();
+    
+    res.status(200).json(craftsmen)
+   
 })
 
 const getTmpReview = asyncHandler(async (req, res) => {

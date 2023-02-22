@@ -29,7 +29,6 @@ const AddCraftsman = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-
     const { craftsman, isSuccess, isError, message } = useSelector((state) => state.craftsman)
 
     useEffect(() => {
@@ -80,6 +79,7 @@ const AddCraftsman = () => {
                 onSubmit={handleSubmit} >
 
                 <TextField
+                variant="filled"
                     type="text"
                     name="craftsman_name"
                     label="ime majstora"
@@ -88,6 +88,7 @@ const AddCraftsman = () => {
                     required />
 
                 <TextField
+                variant="filled"
                     type="text"
                     name="craftsman_last_name"
                     label="prezime majstora"
@@ -96,6 +97,7 @@ const AddCraftsman = () => {
                     required />
 
                 <TextField
+                variant="filled"
                     type="text"
                     name="craftsman_professionion"
                     label="profesija majstora"
@@ -104,6 +106,7 @@ const AddCraftsman = () => {
                     required />
 
                 <TextField
+                variant="filled"
                     type="text"
                     name="craftsman_city"
                     label="grad"
@@ -112,6 +115,7 @@ const AddCraftsman = () => {
                     required />
 
                 <TextField
+                variant="filled"
                     type="email"
                     name="craftsman_email"
                     label="e-mail majstora"
@@ -119,6 +123,7 @@ const AddCraftsman = () => {
                     onChange={handleChange} />
 
                 <TextField
+                variant="filled"
                     type="tel"
                     name="craftsman_phone"
                     pattern="[0-9]{10}"

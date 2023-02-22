@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Navigation from "./components/Navigation";
@@ -9,14 +10,17 @@ import Register from "./components/Register";
 import AddCraftsman from "./components/AddCraftsman";
 import LogOut from "./components/LogOut";
 import Admin from "./components/Admin";
+import AdminHandleCraft from "./components/AdminHandleCraft";
+import AdminHandleRev from "./components/AdminHandleRev";
 import GlobalStyles from "./components/styles/Global";
 import { createTheme, ThemeProvider } from '@mui/material';
 
 function App() {
 
+  const user = useSelector((state) => state.auth);
   const [isLoged, setIsLoged] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  
 
   const theme = createTheme({
     components: {
@@ -41,14 +45,16 @@ function App() {
         <Router basename="/" >
 
           <Navigation />
-
+          
           <Routes>
-            <Route exact path="/" element={<Home isLoged={isLoged} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />} />
-            <Route exact path="/logout" element={<LogOut isLoged={isLoged} setIsLoged={setIsLoged} isAdmin={isAdmin} setIsAdmin={setIsAdmin} />} />
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/logout" element={<LogOut />} />
             <Route exact path="/login" element={<LogIn />} />
             <Route exact path="/register" element={<Register />} />
-            <Route exact path="/AddCraftsman" element={<AddCraftsman />} />
-            <Route exact path="/Admin" element={<Admin />} />
+            <Route exact path="/addcraftsman" element={<AddCraftsman />} />
+            <Route exact path="/admin" element={<Admin />} />
+            <Route path = "/admin/crafts" element={<AdminHandleCraft/>}/>
+            <Route path = "/admin/revs" element={<AdminHandleRev/>}/>
           </Routes>
 
         </Router>

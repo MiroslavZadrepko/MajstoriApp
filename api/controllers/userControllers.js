@@ -88,16 +88,16 @@ const generateToken = (id) => {
 }
 
 /** Get all craftsman, needs to be done!!!!!!!!!!
- * GET
+ * GET api/user
  */
-const getAllCraftsmans = asyncHandler(async (req, res) => {
-    const craftsmans = await Craftsman.find();
-    res.status(200).json(craftsmans)
+const getCraftsmen = asyncHandler(async (req, res) => {
+    const craftsmen = await Craftsman.find();
+    res.status(200).json(craftsmen)
 });
 
 module.exports = {
     addUser,
     login,
     getMe,
-    getAllCraftsmans,
+    getCraftsmen,
 };

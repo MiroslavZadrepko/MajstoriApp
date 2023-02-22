@@ -1,8 +1,12 @@
+import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { delTmpReview, getTmpReview } from "../service";
-import { AdminDiv } from "./styles/AdminDiv.styled";
+
 
 const AdminHandleRev = () => {
+
+    return(<p>ovde će biti adminovo rešavanje recenzija</p>)
+    /*
     //povlačenje recenzija, povlačenje majstora po ID iz poruka, po ID majstora push u recenzije
     const [allTmpReview, setAllTmpReview] = useState([]);
 
@@ -25,7 +29,7 @@ const AdminHandleRev = () => {
     //slice, ubacivanje tog elemnta u novi niz,  pa filter bez tog elementa
     return (
         <>
-            <AdminDiv>
+            <Box>
 
                 {allTmpReview.map((el => <>
                     <p key={el.id}> {el.rewTxt} </p>
@@ -33,10 +37,10 @@ const AdminHandleRev = () => {
                     <button onClick={() => removeRev(el.id)}>Obriši</button> <hr />
                 </>
                 ))}
-            </AdminDiv>
+            </Box>
 
         </>
-    );
+    );*/
 }
 
 export default AdminHandleRev;
