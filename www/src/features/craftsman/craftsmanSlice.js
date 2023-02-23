@@ -51,7 +51,7 @@ export const getAllTmpCraftsman = createAsyncThunk(
 
 //delete one tmp craftsman
 export const deleteTmpCraftsman = createAsyncThunk(
-    'craftsman/deleteTmp',
+    'craftsman/deleteTmpCra',
     async (id, thunkAPI) => {
 
         try {
@@ -68,7 +68,28 @@ export const deleteTmpCraftsman = createAsyncThunk(
             return thunkAPI.rejectWithValue(message);
         }
     }
-)
+);
+
+//move tmp craftsman to perma colection
+export const moveTmpCraftsman = createAsyncThunk(
+    'craftsman/moveTmpCra',
+    async (id, thunkAPI) => {
+
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await services.moveTmpCraftsman(id, token);
+
+        } catch (error) {
+            const message = (
+                error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+                error.message ||
+                error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
 
 export const craftsmanSlice = createSlice({
     name: 'craftsman',
@@ -121,6 +142,20 @@ export const craftsmanSlice = createSlice({
                 state.craftsman = state.craftsman.filter((oneCraft) => oneCraft._id != action.payload.id);
             })
             .addCase(deleteTmpCraftsman.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+            //move tmp craftsman to perma
+            .addCase(moveTmpCraftsman.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(moveTmpCraftsman.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.craftsman = state.craftsman.filter((oneCraft) => oneCraft._id != action.payload.id);
+            })
+            .addCase(moveTmpCraftsman.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload

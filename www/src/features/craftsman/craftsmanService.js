@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-const TMP_URL = '/api/tmp/';
-
 //creates tmp craftsman by user, storring in tmp
+const TMP_URL = '/api/tmp/';
 const createTmpCraftsman = async (craftsman, token) => {
 
     const config = {
@@ -37,12 +36,25 @@ const deleteTmpCraftsman = async (id, token) => {
 
     const response = await axios.delete(ADMIN_URL + `tmpcraftsmen/` + id, config);
     return response.data;
-}
+};
+
+
+const moveTmpCraftsman = async (id, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+
+    const response = await axios.get(ADMIN_URL + `tmpcraftsmen/` + id, config);
+    return response.data;
+};
 
 const services = {
     createTmpCraftsman,
     getAllTmpCraftsman,
     deleteTmpCraftsman,
+    moveTmpCraftsman,
 };
 
 export default services;

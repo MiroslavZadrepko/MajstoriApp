@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { addCraftsman } from '../service'
 import { Box, Button } from '@mui/material';
-import { deleteTmpCraftsman } from '../features/craftsman/craftsmanSlice';
+import { deleteTmpCraftsman, moveTmpCraftsman } from '../features/craftsman/craftsmanSlice';
 
 const TmpCraftsman = ({ el }) => {
 
@@ -25,7 +25,8 @@ const TmpCraftsman = ({ el }) => {
             {el.craftsman_email} <br />
             <Button variant='contained'
                 onClick={() => dispatch(deleteTmpCraftsman(el._id))}>Obriši</Button>
-            <Button variant='contained' >Dodaj u bazu</Button>
+            <Button variant='contained' 
+                onClick={()=> dispatch(moveTmpCraftsman(el._id))}>Dodaj u bazu</Button>
 
         </Box>
     )

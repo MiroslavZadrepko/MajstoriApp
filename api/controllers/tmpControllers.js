@@ -1,27 +1,28 @@
 const asyncHandler = require('express-async-handler');
-const TmpCraftsman = require('../models/tmpCraftsmanModel');
+const TmpCraftsman = require('../models/tmpCraftsmanModel'); //source
 const TmpReview = require('../models/tmpReviewModel');
 const User = require('../models/userModel');
-const Craftsman = require('../models/craftsmanModel')
+const Craftsman = require('../models/craftsmanModel'); //$merge
 
 // POST api/tmp 
+// add craftsman
 const addTmpCraftsman = asyncHandler(async (req, res) => {
 
     const { craftsman_name, craftsman_last_name, craftsman_professionion, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev } = req.body;
 
     //check if all fields ar ok
     if (!craftsman_name || !craftsman_last_name || !craftsman_professionion || !craftsman_city || !craftsman_phone) {
-        res.status(400).json({message: 'Please, fill up the form'});
-        throw new Error('Please, fill up the form')
-    }
+        res.status(400).json({message: 'Please, fill up the form'})
+        throw new Error('Please, fill up the form');
+    };
 
     //check if craftsman exists
-    const craftsmanExists = await Craftsman.findOne({ craftsman_phone })
-    const tmpCrafstmanExists = await TmpCraftsman.findOne({ craftsman_phone })
+    const craftsmanExists = await Craftsman.findOne({ craftsman_phone });
+    const tmpCrafstmanExists = await TmpCraftsman.findOne({ craftsman_phone });
     if (craftsmanExists || tmpCrafstmanExists) {
-        res.status(400).json({message: 'Craftsman with that phonenumber already exists'});
-        throw new Error('Craftsman with that phonenumber already exists')
-    }
+        res.status(400).json({message: 'Craftsman with that phonenumber already exists'})
+        throw new Error('Craftsman with that phonenumber already exists');
+    };
 
     const user = await User.findById(req.user.id).select("-user_password");
     //create tmp craftsman
