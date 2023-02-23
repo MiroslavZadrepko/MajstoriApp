@@ -2,38 +2,35 @@ const asyncHandler = require('express-async-handler');
 const Craftsman = require('../models/tmpCraftsmanModel')
 
 
-const getAllUsers = asyncHandler(async (req, res) => {    
+const getAllUsers = asyncHandler(async (req, res) => {
     res.status(200).json({ message: '/api/admin get All Users works' })
-})
+});
+
 /**GET TMP CRAFTSMEN
  * GET /api/admin/tmpcraftsmen
  */
 const getTmpCraftsman = asyncHandler(async (req, res) => {
-    const craftsmen = await Craftsman.find();
     
-    res.status(200).json(craftsmen)
-   
-})
+    const craftsmen = await Craftsman.find();
+    res.status(200).json(craftsmen);
+});
 
 /**DELETE TMP CRAFTSMAN 
  * DELETE api/admin/tmpcraftsman/id
  */
 
-const deleteTmpCrafstman = asyncHandler(async(req, res) => {
-    
+const deleteTmpCrafstman = asyncHandler(async (req, res) => {
+
     const craftsman = await Craftsman.findById(req.params.id)
-
-    console.log(craftsman);
     if (!craftsman) {
-      res.status(400)
-      throw new Error('Goal not found')
-    }
-  
-    await craftsman.remove();
-  
-    res.status(200).json({ id: req.params.id })
+        res.status(400)
+        throw new Error('craftsman not found')
+    };
 
-})
+    await craftsman.remove();
+
+    res.status(200).json({ id: req.params.id });
+});
 
 const getTmpReview = asyncHandler(async (req, res) => {
     res.status(200).json({ message: '/api/admin get Tmp Review works' })

@@ -12,8 +12,8 @@ const initialState = {
 export const createTmpCraftsman = createAsyncThunk(
     'craftsman/create',
     async (craftsman, thunkAPI) => {
-        
-        try {    
+
+        try {
             const token = thunkAPI.getState().auth.user.token
             return await services.createTmpCraftsman(craftsman, token);
 
@@ -26,7 +26,49 @@ export const createTmpCraftsman = createAsyncThunk(
                 error.toString();
             return thunkAPI.rejectWithValue(message);
         }
-    })
+    }
+)
+
+export const getAllTmpCraftsman = createAsyncThunk(
+    'craftsman/allTmpCraft',
+    async (_, thunkAPI) => {
+
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await services.getAllTmpCraftsman(token);
+
+        } catch (error) {
+            const message = (
+                error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+                error.message ||
+                error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
+//delete one tmp craftsman
+export const deleteTmpCraftsman = createAsyncThunk(
+    'craftsman/deleteTmp',
+    async (id, thunkAPI) => {
+
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await services.deleteTmpCraftsman(id, token);
+
+        } catch (error) {
+            const message = (
+                error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+                error.message ||
+                error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+)
 
 export const craftsmanSlice = createSlice({
     name: 'craftsman',
@@ -41,6 +83,7 @@ export const craftsmanSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            //create tmp craftsman by user
             .addCase(createTmpCraftsman.pending, (state) => {
                 state.isLoading = true;
             })
@@ -50,6 +93,34 @@ export const craftsmanSlice = createSlice({
                 state.craftsman = action.payload;
             })
             .addCase(createTmpCraftsman.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            }) 
+            //get all tmp kraftsman by admin
+            .addCase(getAllTmpCraftsman.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getAllTmpCraftsman.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.craftsman = action.payload;
+            })
+            .addCase(getAllTmpCraftsman.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+            //delete tmp crftsman by admin
+            .addCase(deleteTmpCraftsman.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(deleteTmpCraftsman.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.craftsman = state.craftsman.filter((oneCraft) => oneCraft._id != action.payload.id);
+            })
+            .addCase(deleteTmpCraftsman.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload

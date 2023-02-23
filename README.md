@@ -11,7 +11,8 @@ It's a database of craftsmen. You can search for specific craftsmen by professio
 MERN, Styled Components, MUI, React Router, Git, VS Code
 
 ## ToDo
-Convert to MERN + redux fully, 
+filter for craftsman profession is not working, part of input 
+convert to MERN + redux fully, 
 add review,
 rev and add craftsman from tmp to perma base,
 admin funcionality,

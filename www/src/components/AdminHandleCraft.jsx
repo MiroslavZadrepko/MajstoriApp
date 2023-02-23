@@ -1,28 +1,29 @@
-import { Box, Button } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { getTmpCraftsman, addCraftsman, delTempCraftsman } from '../service'
+import { Box } from '@mui/material';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getAllTmpCraftsman, reset } from '../features/craftsman/craftsmanSlice';
+import Spiner from './Spiner';
+import TmpCraftsman from './TmpCraftsman';
 
 const AdminHandleCraft = () => {
 
-    const [allTmpCraftsman, setAllTmpCraftsman] = useState([]);
+    const dispatch = useDispatch();
+
+    const { craftsman, isLoading, isError, message } = useSelector((state) => state.craftsman)
 
     useEffect(() => {
-        getTmpCraftsman().then(res => {
 
-            setAllTmpCraftsman(res.data);
-           
-        })
-    }, []);
+        dispatch(getAllTmpCraftsman());
 
-    const deleteCraftsman = (id) => {
-        
-        const removeCraftsman = [...allTmpCraftsman].filter(craft => craft._id !== id);
-        setAllTmpCraftsman(removeCraftsman); 
-        console.log('click' + removeCraftsman)
-        delTempCraftsman(id).then(res => {
-        console.log('deleted');
-        });
-    };
+        return () => {
+            dispatch(reset());
+        }
+
+    }, [isError, message, dispatch]);
+
+    if(isLoading) {
+        return <Spiner/>
+    }
 
     return (
         <>
@@ -35,43 +36,16 @@ const AdminHandleCraft = () => {
                     m: 5,
                 }}>
 
-                {allTmpCraftsman.map(el =>
-
-                    <Box key={el._id} sx={{
-                        backgroundColor: 'background.paper',
-                        boxShadow: 1,
-                        borderRadius: 2,
-                        p: 2,
-                        m: 1,
-                        minWidth: 300,
-                    }} >
-
-                        {el.craftsman_name} {el.craftsman_last_name}, {el.craftsman_city}  <br />
-                        {el.craftsman_professionion} <br />
-                        {el.craftsman_phone} <br />
-                        {el.craftsman_email} <br />
-                        <Button variant='contained'
-                            onClick={()=> deleteCraftsman(el._id)} >Obriši</Button>
-                        <Button variant='contained' >Dodaj u bazu</Button>
-
-                    </Box>
-                )}
+                {craftsman != null ? craftsman.map((el) => (<TmpCraftsman key={el._id} el={el} />)) 
+                
+                : (<p>Nema novih predloga majstora</p>) 
+               }
             </Box>
         </>
     )
 }
 
-/*
 
-
-    const replaceCraftsman = (name, last_name, profession, email, phone, id) => {
-        addCraftsman (name, last_name, profession, email, phone).then(delTempCraftsman(id).then(res => {
-            //console.log(res.data);
-        }));
-        
-          <button onClick={()=> replaceCraftsman(el.craftsman_name, el.craftsman_last_name, el.craftsman_profession, el.craftsman_email, el.craftsman_phone, el.id)}>Dodaj</button>
-
-*/
 
 
 export default AdminHandleCraft;

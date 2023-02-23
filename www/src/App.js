@@ -18,9 +18,6 @@ import { createTheme, ThemeProvider } from '@mui/material';
 function App() {
 
   const user = useSelector((state) => state.auth);
-  const [isLoged, setIsLoged] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-  
 
   const theme = createTheme({
     components: {
