@@ -13,31 +13,31 @@ const AdminHandleCraft = () => {
     useEffect(() => {
 
         dispatch(getAllTmpCraftsman());
-        
+
         return () => {
             dispatch(reset());
         }
 
     }, [isError, message, dispatch]);
 
+    if (craftsman != null) {
     return (
         <>
-            {craftsman == null || craftsman.lenght == 0 ?
-                (<p>Nema novih predloga majstora</p>) :
-                (<Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'space-evenly',
-                        m: 5,
-                    }}>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'space-evenly',
+                    m: 5,
+                }}>
 
-                    {craftsman.map((el) => (<TmpCraftsman key={el._id} el={el} />))}
-
-                </Box>)}
+                {craftsman != null ?
+                    craftsman.map((el) => (<TmpCraftsman key={el._id} el={el} />)) :
+                    <p>Nema novih predloga majstora</p>}
+            </Box>
         </>
-    )
+    )}
 }
 
 

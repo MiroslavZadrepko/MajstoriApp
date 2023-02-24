@@ -38,7 +38,7 @@ const deleteTmpCraftsman = async (id, token) => {
     return response.data;
 };
 
-
+//admin moves one tmp craftsman to perm and deletes origin document
 const moveTmpCraftsman = async (id, token) => {
     const config = {
         headers: {
@@ -46,7 +46,7 @@ const moveTmpCraftsman = async (id, token) => {
         }
     };
 
-    const response = await axios.get(ADMIN_URL + `tmpcraftsmen/` + id, config);
+    const response = await axios.delete(ADMIN_URL + `tmpcraftsmen/` + id, config);
     return response.data;
 };
 
