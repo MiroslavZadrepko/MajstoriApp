@@ -36,18 +36,15 @@ const deleteTmpCrafstman = asyncHandler(async (req, res) => {
  ***********************************/
 const addCraftsman = asyncHandler(async (req, res) => {
 
-    const craftsman = await TmpCraftsman.findByIdAndDelete(req.params.id);
+    const craftsman = await TmpCraftsman.findById(req.params.id);
 
     if (!craftsman) {
         res.status(400)
         throw new Error('craftsman not found')
     };
 
-    // const destInstance = new Craftsman(craftsman);
-    // await destInstance.save();
-    // if up goes, next part is out
-
     const filter = { _id: craftsman._id };
+
     await TmpCraftsman.aggregate([
         { $match: filter },
         {
@@ -59,31 +56,9 @@ const addCraftsman = asyncHandler(async (req, res) => {
         },
     ]);
 
-    /**
-     // Assume the following document exists in the source collection
-{
-  "_id": ObjectId("1234567890"),
-  "name": "John Doe",
-  "age": 30,
-  "email": "johndoe@example.com"
-}
-
-// Cut and paste the document from the source to the destination model
-const SourceModel = mongoose.model("SourceModel", sourceSchema);
-const DestinationModel = mongoose.model("DestinationModel", destinationSchema);
-
-try {
-  const document = await SourceModel.findOneAndDelete({ "_id": ObjectId("1234567890") });
-  const destinationInstance = new DestinationModel(document);
-  await destinationInstance.save();
-} catch (err) {
-  console.error(err);
-}
-
-     */
+    await craftsman.remove();
 
     res.status(200).json({ id: req.params.id });
-
 })
 
 
