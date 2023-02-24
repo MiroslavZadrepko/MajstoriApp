@@ -12,7 +12,7 @@ const AddCraftsman = () => {
         craftsman_last_name: '',
         craftsman_professionion: '',
         craftsman_city: '',
-        craftsman_email: '',
+        
         craftsman_phone: '',
         craftsman_rev: []
     })
@@ -22,7 +22,6 @@ const AddCraftsman = () => {
         craftsman_last_name,
         craftsman_professionion,
         craftsman_city,
-        craftsman_email,
         craftsman_phone,
         craftsman_rev } = tmpCraftsman;
 
@@ -53,13 +52,12 @@ const AddCraftsman = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
+ 
         const craftsman = {
             craftsman_name,
             craftsman_last_name,
             craftsman_professionion,
             craftsman_city,
-            craftsman_email,
             craftsman_phone,
             craftsman_rev
         };
@@ -113,14 +111,6 @@ const AddCraftsman = () => {
                     value={craftsman_city}
                     onChange={handleChange}
                     required />
-
-                <TextField
-                variant="filled"
-                    type="email"
-                    name="craftsman_email"
-                    label="e-mail majstora"
-                    value={craftsman_email}
-                    onChange={handleChange} />
 
                 <TextField
                 variant="filled"

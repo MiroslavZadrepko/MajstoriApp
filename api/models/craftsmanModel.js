@@ -17,9 +17,7 @@ const craftsmanSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please add crfatsmans city']
     },
-    craftsman_email: {
-        type: String,
-    },
+
     craftsman_phone: {
         type: Number,
         required: [true, 'Please add crfatsmans phonenumber']

@@ -1,14 +1,14 @@
 const asyncHandler = require('express-async-handler');
-const TmpCraftsman = require('../models/tmpCraftsmanModel'); //source
+const TmpCraftsman = require('../models/tmpCraftsmanModel'); 
 const TmpReview = require('../models/tmpReviewModel');
 const User = require('../models/userModel');
-const Craftsman = require('../models/craftsmanModel'); //$merge
+const Craftsman = require('../models/craftsmanModel'); 
 
 // POST api/tmp 
 // add craftsman
 const addTmpCraftsman = asyncHandler(async (req, res) => {
 
-    const { craftsman_name, craftsman_last_name, craftsman_professionion, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev } = req.body;
+    const { craftsman_name, craftsman_last_name, craftsman_professionion, craftsman_city, craftsman_phone, craftsman_rev } = req.body;
 
     //check if all fields ar ok
     if (!craftsman_name || !craftsman_last_name || !craftsman_professionion || !craftsman_city || !craftsman_phone) {
@@ -31,7 +31,6 @@ const addTmpCraftsman = asyncHandler(async (req, res) => {
         craftsman_last_name: req.body.craftsman_last_name,
         craftsman_professionion: req.body.craftsman_professionion,
         craftsman_city: req.body.craftsman_city,
-        craftsman_email: req.body.craftsman_email,
         craftsman_phone: req.body.craftsman_phone,
         craftsman_rev: [],
         user
@@ -44,7 +43,6 @@ const addTmpCraftsman = asyncHandler(async (req, res) => {
             craftsman_last_name: tmpCraftsman.craftsman_last_name,
             craftsman_professionion: tmpCraftsman.craftsman_professionion,
             craftsman_city: tmpCraftsman.craftsman_city,
-            craftsman_email: tmpCraftsman.craftsman_email,
             craftsman_phone: tmpCraftsman.craftsman_phone,
             craftsman_rev: tmpCraftsman.craftsman_rev,
             user: tmpCraftsman.user,
