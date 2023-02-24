@@ -11,14 +11,6 @@ It's a database of craftsmen. You can search for specific craftsmen by professio
 MERN, Styled Components, MUI, React Router, Git, VS Code
 
 ## ToDo
-delete tmp craft after moving to perm
-solve email issue (MongoServerError: PlanExecutor error during aggregation :: caused by :: E11000 duplicate key error collection), empty value
-filter for craftsman profession is not working, part of input,
-convert to MERN + redux fully, 
-add review,
-rev from tmp to perma base,
-admin funcionality(s),
-translation to english, 
-responsivnes. 
+delete tmp craft after moving to perm, filter for craftsman profession is not working (part of input), add review and move from tmp to perma base, convert to MERN + redux fully, admin funcionality(s), translation to english, responsivnes. 
 
 ## Work in progress :) 
