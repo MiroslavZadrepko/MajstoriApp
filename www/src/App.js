@@ -44,7 +44,7 @@ function App() {
           <Navigation />
           
           <Routes>
-            <Route exact path="/" element={<Home />} />
+            <Route exact path="*" element={<Home />} />
             <Route exact path="/logout" element={<LogOut />} />
             <Route exact path="/login" element={<LogIn />} />
             <Route exact path="/register" element={<Register />} />

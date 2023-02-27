@@ -1,17 +1,8 @@
 import axios from 'axios';
 
-//creates tmp craftsman by user, storring in tmp
-const TMP_URL = '/api/tmp/';
-const createTmpCraftsman = async (craftsman, token) => {
-
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    };
-    const response = await axios.post(TMP_URL, craftsman, config);
-    return response.data;
-};
+//////////////////
+//ADMIN SERVICES//
+//////////////////
 
 //admin gets all tmp craftsman
 const ADMIN_URL = '/api/admin/'
@@ -50,11 +41,36 @@ const moveTmpCraftsman = async (id, token) => {
     return response.data;
 };
 
+/////////////////
+//USER SERVICES//
+/////////////////
+
+//creates tmp craftsman by user, storring in tmp
+const TMP_URL = '/api/tmp/';
+const createTmpCraftsman = async (craftsman, token) => {
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+    const response = await axios.post(TMP_URL, craftsman, config);
+    return response.data;
+};
+
+const USER_URL = '/api/user/';
+const findCraftsmen = async (searchTerm) => {
+
+    const response = await axios.get(`${USER_URL}craftsmen?search=${searchTerm}`);
+    return response.data;
+}
+
 const services = {
     createTmpCraftsman,
     getAllTmpCraftsman,
     deleteTmpCraftsman,
     moveTmpCraftsman,
+    findCraftsmen
 };
 
 export default services;

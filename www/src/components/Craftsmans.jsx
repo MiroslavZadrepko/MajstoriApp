@@ -1,19 +1,20 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Box } from "@mui/material";
+import { Routes, Route, Link } from "react-router-dom";
 import OneCraftsman from "./OneCraftsman";
-import { CraftmansDicStyled } from "./styles/CrafmansDiv.styled"
 
-const Craftmans = ({ craftsmans}) => {
-    
+const Craftmans = ({ craftsman }) => {
+
     return (
-        <> 
-            <Router>
-                <CraftmansDicStyled>
-                    {craftsmans.map(craftsman => <div key={craftsman.id}><Link to={`/oneCraftsman/${craftsman.id}`}>{craftsman.craftsman_name} {craftsman.craftsman_last_name}, {craftsman.craftsman_profession}</Link></div>)}
-                    <Routes>
-                        <Route path="/oneCraftsman/:id" element={<OneCraftsman craftsmans={craftsmans} />}/>
-                    </Routes>
-                </CraftmansDicStyled>
-            </Router>
+        <>
+
+            <Box component='div'>
+                { console.log(craftsman[0]._id) }
+                {craftsman.map(craftsman => <div key={craftsman._id}><Link to={`/oneCraftsman/${craftsman._id}`}>{craftsman.craftsman_name} {craftsman.craftsman_last_name}, {craftsman.craftsman_professionion}</Link></div>)}
+                <Routes>
+                    <Route path="/oneCraftsman/:id" element={<OneCraftsman craftsman={craftsman} />} />
+                </Routes>
+            </Box>
+
         </>
     );
 }

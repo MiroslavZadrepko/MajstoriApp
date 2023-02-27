@@ -91,6 +91,23 @@ export const moveTmpCraftsman = createAsyncThunk(
     }
 );
 
+export const findCraftsmen = createAsyncThunk(
+    'craftsman/findCraftsmen',
+    async (searchTerm, thunkAPI) =>{
+        try {
+            return await services.findCraftsmen(searchTerm);
+        } catch (error) {
+            const message = (
+                error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+                error.message ||
+                error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+)
+
 export const craftsmanSlice = createSlice({
     name: 'craftsman',
     initialState,
@@ -156,6 +173,20 @@ export const craftsmanSlice = createSlice({
                 state.craftsman = state.craftsman.filter((oneCraft) => oneCraft._id != action.payload.id);
             })
             .addCase(moveTmpCraftsman.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+            //search craftsman by profession
+            .addCase(findCraftsmen.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(findCraftsmen.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.craftsman = action.payload;
+            })
+            .addCase(findCraftsmen.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload

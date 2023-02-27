@@ -17,10 +17,7 @@ export const addTmpReview = (rewTxt, rewCraftID) => axios.post(`http://localhost
 
 const ADMIN_URL = '/api/admin/'
 
-export const addCraftsman = (craftsman_name, craftsman_last_name, craftsman_profession, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev) => axios.post(`http://localhost:8080/craftsmen`, { craftsman_name, craftsman_last_name, craftsman_profession, craftsman_city, craftsman_email, craftsman_phone, craftsman_rev })
-
 export const getTmpReview = () => axios.get(`http://localhost:8080/tmpreviews`)
 
 export const delTmpReview = (id) => axios.delete(`http://localhost:8080/tmpreviews/${id}`)
 /** ADD REVIEW!!!!!!!!!!!!! */
-

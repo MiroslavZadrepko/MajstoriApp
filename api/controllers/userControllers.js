@@ -4,6 +4,7 @@ const asyncHandler = require('express-async-handler');
 const Craftsman = require('../models/craftsmanModel');
 const User = require('../models/userModel');
 
+
 /** REGISTER NEW USER
  *  POST api/user 
  */
@@ -13,15 +14,15 @@ const addUser = asyncHandler(async (req, res) => {
 
     //check if all fields are filled 
     if (!user_name || !user_email || !user_password) {
-        res.status(400).json({message: 'Please, fill up the form' });
+        res.status(400).json({ message: 'Please, fill up the form' });
         throw new Error('Please, fill up the form');
     }
 
     //check if user exists 
     const userExists = await User.findOne({ user_email })
     if (userExists) {
-        res.status(400).json({message: 'That email is registered'});
-        throw new Error('that email is registered');  
+        res.status(400).json({ message: 'That email is registered' });
+        throw new Error('that email is registered');
     }
 
     //hashing the pass 
@@ -45,7 +46,7 @@ const addUser = asyncHandler(async (req, res) => {
             token: generateToken(user._id)
         })
     } else {
-        res.status(400).json({message: 'Invalid data'});
+        res.status(400).json({ message: 'Invalid data' });
         throw new Error('Invalid data');
     }
 });
@@ -68,7 +69,7 @@ const login = asyncHandler(async (req, res) => {
             token: generateToken(user._id)
         })
     } else {
-        res.status(400).json({message: 'Invalid data'});
+        res.status(400).json({ message: 'Invalid data' });
         throw new Error('Invalid data')
     }
 });
@@ -77,7 +78,7 @@ const login = asyncHandler(async (req, res) => {
  * GET api/user/me 
  * private route
  */
-const getMe = asyncHandler(async (req, res) => {   
+const getMe = asyncHandler(async (req, res) => {
     res.status(200).json(req.user)
 });
 
@@ -87,11 +88,13 @@ const generateToken = (id) => {
     })
 }
 
-/** Get all craftsman, needs to be done!!!!!!!!!!
- * GET api/user
+/** Get craftsman by profesion, needs to be done!!!!!!!!!!
+ * GET api/user/craftsmen
  */
 const getCraftsmen = asyncHandler(async (req, res) => {
-    const craftsmen = await Craftsman.find();
+
+    const searchTerm = req.query.searchTerm;
+    const craftsmen = await Craftsman.find({ profession: searchTerm}); 
     res.status(200).json(craftsmen)
 });
 
