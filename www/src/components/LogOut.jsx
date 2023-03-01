@@ -9,7 +9,6 @@ const LogOut = ({ setUser, isLoged, setIsLoged, isAdmin, setIsAdmin }) => {
             if (isLoged) {
                
                 setIsLoged(prev => !prev)
-                
                 setUser(null)
             }
             if (isAdmin) {

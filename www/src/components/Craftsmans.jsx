@@ -1,11 +1,8 @@
-import { Box } from "@mui/material";
-import { useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Box, Grid  } from "@mui/material";
 import OneCraftsman from "./OneCraftsman";
 
 const Craftmans = ({ craftsman }) => {
 
-    const [click, setClick] = useState(false)
     return (
         <>
             <Box component='div'
@@ -15,27 +12,13 @@ const Craftmans = ({ craftsman }) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     m: 5,
-                    backgroundColor: 'primary.dark',
-                    '&:hover': {
-                        backgroundColor: 'primary.main',
-                        opacity: [0.9, 0.8, 0.7]
-                    }
                 }} >
-                {craftsman.map(craftsman =>
-                    <Box key={craftsman._id}>
-                        <Link
-                            to={`/oneCraftsman/${craftsman._id}`}
-                            style={{ textDecoration: 'none' }}
-                            
-                        >
-                            {craftsman.craftsman_name} {craftsman.craftsman_last_name}, {craftsman.craftsman_professionion}
-                        </Link>
+                {craftsman.map(onecraftsman =>
 
-                    </Box>)}
-
-                < Routes >
-                    <Route path="/oneCraftsman/:id" element={<OneCraftsman craftsman={craftsman}  />} />
-                </Routes>
+                    <Grid key={onecraftsman._id}>
+                        <OneCraftsman craftsman={craftsman} id={onecraftsman._id} />
+                    </Grid>
+                )}
             </Box >
         </>
     );
