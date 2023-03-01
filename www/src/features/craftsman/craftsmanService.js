@@ -61,7 +61,7 @@ const createTmpCraftsman = async (craftsman, token) => {
 const USER_URL = '/api/user/';
 const findCraftsmen = async (searchTerm) => {
 
-    const response = await axios.get(`${USER_URL}craftsmen?search=${searchTerm}`);
+    const response = await axios.get(`${USER_URL}search?searchQuery=${searchTerm}`);
     return response.data;
 }
 

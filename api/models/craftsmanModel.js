@@ -25,7 +25,8 @@ const craftsmanSchema = mongoose.Schema({
     craftsman_rev: {
         type: [String]
     }
-}, {timestamps: true}
+}, {timestamps: true},
+
 );
 
 module.exports = mongoose.model('Craftsman', craftsmanSchema);

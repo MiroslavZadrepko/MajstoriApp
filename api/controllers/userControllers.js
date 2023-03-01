@@ -88,13 +88,15 @@ const generateToken = (id) => {
     })
 }
 
-/** Get craftsman by profesion, needs to be done!!!!!!!!!!
+/** Get craftsman by profesion
  * GET api/user/craftsmen
  */
 const getCraftsmen = asyncHandler(async (req, res) => {
 
-    const searchTerm = req.query.searchTerm;
-    const craftsmen = await Craftsman.find({ profession: searchTerm}); 
+    const { searchQuery } = req.query;
+    const craftsman_professionion = new RegExp(searchQuery, 'i');
+    const craftsmen = await Craftsman.find( {craftsman_professionion} );
+
     res.status(200).json(craftsmen)
 });
 

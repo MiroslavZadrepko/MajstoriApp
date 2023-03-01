@@ -91,6 +91,7 @@ export const moveTmpCraftsman = createAsyncThunk(
     }
 );
 
+//find all craftsman by profession 
 export const findCraftsmen = createAsyncThunk(
     'craftsman/findCraftsmen',
     async (searchTerm, thunkAPI) =>{
