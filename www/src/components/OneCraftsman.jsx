@@ -39,29 +39,25 @@ const OneCraftsman = ({ craftsman, id }) => {
                     },
                     width: "50vw"
                 }} >
-                    <CardContent sx={{
-                        py: 0
-                        }} >
+                    <CardContent sx={{ py: 0 }} >
                         <p>{majstor.craftsman_name} {majstor.craftsman_last_name}, </p>
                         <p>{majstor.craftsman_city}</p>
                     </CardContent>
 
                     <CardActions disableSpacing>
-                    Telefon i recenzije
+                        Telefon i recenzije
                         <ExpandMore
                             expand={expanded}
                             onClick={handleExpandClick}
                             aria-expanded={expanded}
                             aria-label="show more"
                         >
-                        <ExpandMoreIcon />
+                            <ExpandMoreIcon />
                         </ExpandMore>
                     </CardActions>
-                    
+
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
-                        <CardContent sx={{
-                        py: 0
-                        }} >
+                        <CardContent sx={{ py: 0 }} >
                             <p>{majstor.craftsman_professionion}</p>
                             <p>{majstor.craftsman_phone}</p>
                             <h3>Recenzije:</h3>

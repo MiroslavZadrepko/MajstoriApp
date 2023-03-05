@@ -20,6 +20,7 @@ const Review = ({ id }) => {
                     justifyContent: 'center',
                     m: 5,
                 }}
+
                 onSubmit={(e) => {
                     e.preventDefault()
 
@@ -29,8 +30,9 @@ const Review = ({ id }) => {
                             return () => clearTimeout(timer);
                         }, 500);
                     });
-                }
-                }> {isNaN(status) ?
+                }}>
+                    
+                {isNaN(status) ?
                     <>
                         <RevTextareaStyled type="text" placeholder="Napišite recenziju" onChange={(e) => { setRecenzija(e.target.value) }} /><br />
                         <Button variant="contained" type="submit"> Pošaljite recenziju </Button></> : <p>Hvala na recenziji, biće razmotrena</p>
