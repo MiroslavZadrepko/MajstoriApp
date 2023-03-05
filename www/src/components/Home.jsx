@@ -58,6 +58,15 @@ const Home = () => {
         navigate('/');
     }
 
+    let filtrirani = null;
+
+    if(craftsman != null) {
+        
+        filtrirani = craftsman.filter((craftsman) => {
+            return craftsman.craftsman_city.toLowerCase().includes(city.toLowerCase())
+        })
+    };
+    
     return (
 
         <Box component='div'>
@@ -105,7 +114,7 @@ const Home = () => {
                 <Button variant="contained" onClick={handleSubmit}>Pretražite</Button>
             </Box>
 
-            {craftsman != null ? <Craftsmans craftsman={craftsman} /> : ''}
+            {filtrirani != null ? <Craftsmans filtrirani={filtrirani} /> : ''}
 
         </Box>
     );

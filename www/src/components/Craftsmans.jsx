@@ -1,7 +1,7 @@
 import { Box, Grid  } from "@mui/material";
 import OneCraftsman from "./OneCraftsman";
 
-const Craftmans = ({ craftsman }) => {
+const Craftmans = ({ filtrirani }) => {
 
     return (
         <>
@@ -13,10 +13,10 @@ const Craftmans = ({ craftsman }) => {
                     justifyContent: 'center',
                     m: 5,
                 }} >
-                {craftsman.map(onecraftsman =>
+                {filtrirani.map(onecraftsman =>
 
                     <Grid key={onecraftsman._id}>
-                        <OneCraftsman craftsman={craftsman} id={onecraftsman._id} />
+                        <OneCraftsman filtrirani={filtrirani} id={onecraftsman._id} />
                     </Grid>
                 )}
             </Box >

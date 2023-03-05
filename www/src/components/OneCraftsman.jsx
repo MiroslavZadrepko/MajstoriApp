@@ -4,7 +4,6 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 import { Navigate } from "react-router";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Review from "./Review";
 
 const ExpandMore = styled((props) => {
@@ -18,7 +17,7 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const OneCraftsman = ({ craftsman, id }) => {
+const OneCraftsman = ({ filtrirani, id }) => {
 
     const [expanded, setExpanded] = useState(false);
 
@@ -26,7 +25,7 @@ const OneCraftsman = ({ craftsman, id }) => {
         setExpanded(!expanded);
     };
 
-    let majstor = craftsman.find(element => element._id == id)
+    let majstor = filtrirani.find(element => element._id == id)
 
     return majstor ?
         <>
