@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -13,27 +12,12 @@ import Admin from "./components/Admin";
 import AdminHandleCraft from "./components/AdminHandleCraft";
 import AdminHandleRev from "./components/AdminHandleRev";
 import GlobalStyles from "./components/styles/Global";
-import { createTheme, ThemeProvider } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
+import theme from "./components/styles/theme";
 
 function App() {
 
   const user = useSelector((state) => state.auth);
-
-  const theme = createTheme({
-    components: {
-      MuiTextField: {
-        styleOverrides: {
-          root: {
-            width: '45%',
-            margin: '1%',
-            backgroundColor: '#ffffff ',
-            opacity: '.8',
-          },
-        },
-      },
-    },
-  });
-
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -42,7 +26,7 @@ function App() {
         <Router basename="/" >
 
           <Navigation />
-          
+
           <Routes>
             <Route exact path="*" element={<Home />} />
             <Route exact path="/logout" element={<LogOut />} />
@@ -50,14 +34,14 @@ function App() {
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/addcraftsman" element={<AddCraftsman />} />
             <Route exact path="/admin" element={<Admin />} />
-            <Route path = "/admin/crafts" element={<AdminHandleCraft/>}/>
-            <Route path = "/admin/revs" element={<AdminHandleRev/>}/>
+            <Route path="/admin/crafts" element={<AdminHandleCraft />} />
+            <Route path="/admin/revs" element={<AdminHandleRev />} />
           </Routes>
 
         </Router>
 
         <ToastContainer />
-        
+
       </div>
     </ThemeProvider>
   );

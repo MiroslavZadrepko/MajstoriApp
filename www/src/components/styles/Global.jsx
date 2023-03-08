@@ -16,6 +16,8 @@ body{
     height: 100vh;
     background-image: url('../pozadin4.jpg');
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .faqbtn{

@@ -36,7 +36,6 @@ const moveTmpCraftsman = async (id, token) => {
             Authorization: `Bearer ${token}`
         }
     };
-
     const response = await axios.delete(ADMIN_URL + `tmpcraftsmen/` + id, config);
     return response.data;
 };

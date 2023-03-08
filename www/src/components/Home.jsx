@@ -22,13 +22,11 @@ const Home = () => {
     const { craftsman } = useSelector((state) => state.craftsman);
 
     const handleCity = (e) => {
-
         setCity(e.target.value);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
         if (city == '') {
             toast.warning('Morate izabrati grad !', {
                 position: toast.POSITION.TOP_CENTER
@@ -39,7 +37,6 @@ const Home = () => {
                 dispatch(reset());
             }
         }
-
     }
 
     const handleKey = (e) => {
@@ -60,37 +57,31 @@ const Home = () => {
 
     let filtrirani = null;
 
-    if(craftsman != null) {
-        
+    if (craftsman != null && city != '') {
         filtrirani = craftsman.filter((craftsman) => {
             return craftsman.craftsman_city.toLowerCase().includes(city.toLowerCase())
         })
     };
-    
+
     return (
-
         <Box component='div'>
-
             <Box component='div'
-                sx={{ //možda ceo sx da premestim sprat više
+                sx={{                    
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
                     m: 5,
                 }}>
-
-                <h2>Nađite dobrog majstora sa preporukom i ocenom.</h2>
-                <FormControl sx={{ minWidth: 280 }}>
-                    <InputLabel id="demo-simple-select-helper-label">Izaberite grad</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-helper-label"
-                        id="demo-simple-select-helper"
+                <FormControl variant="filled" >
+                    <InputLabel id="demo-simple-select-filled-label" >Izaberite grad</InputLabel>
+                    <Select 
+                        labelId="demo-simple-select-filled-label"
+                        id="demo-simple-select-filled"
                         value={city}
                         label="Izaberite grad"
                         onChange={handleCity}
                         required
-
                     >
                         <MenuItem value="">
                             <em>Izaberite grad</em>
@@ -99,9 +90,7 @@ const Home = () => {
                         <MenuItem value={'Beograd'}>Beograd</MenuItem>
                     </Select>
 
-
                     <TextField
-                        sx={{ minWidth: 280 }}
                         type="text"
                         value={searchTerm}
                         label="Unesite profesiju majstora"

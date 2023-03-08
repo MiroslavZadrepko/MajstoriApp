@@ -46,7 +46,9 @@ const AddCraftsman = () => {
     const handleChange = (e) => {
         setTmpCraftsman((tmpCraftsman) => ({
             ...tmpCraftsman,
-            [e.target.name]: e.target.value,
+            [e.target.name]: e.target.name === 'craftsman_professionion' || e.target.name === 'craftsman_city' 
+            ? e.target.value.toLowerCase() 
+            : e.target.value,
         }));
     };
 
