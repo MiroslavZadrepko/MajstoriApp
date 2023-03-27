@@ -12,14 +12,17 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
 }
 
-body{
-    height: 100vh;
+body {
     background-image: url('../pozadin4.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-clip: content-box;
 }
 
+#back-to-top-anchor{
+    min-height:0px;
+}
 .faqbtn{
     float: left;
     margin-top: 5vh;

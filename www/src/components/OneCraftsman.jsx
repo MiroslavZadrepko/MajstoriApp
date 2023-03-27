@@ -18,9 +18,7 @@ const ExpandMore = styled((props) => {
 }));
 
 const OneCraftsman = ({ filtrirani, id }) => {
-
     const [expanded, setExpanded] = useState(false);
-
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -38,13 +36,11 @@ const OneCraftsman = ({ filtrirani, id }) => {
                     },
                     width: "50vw"
                 }} >
-                    <CardContent sx={{ py: 0 }} >
-                        <p>{majstor.craftsman_name} {majstor.craftsman_last_name}, </p>
-                        <p>{majstor.craftsman_city}</p>
-                    </CardContent>
 
                     <CardActions disableSpacing>
-                        Telefon i recenzije
+                        <CardContent sx={{ py: 0, pl: 1, my: 0 }} >
+                            <p>{majstor.craftsman_name} {majstor.craftsman_last_name}, {majstor.craftsman_city}</p>
+                        </CardContent>
                         <ExpandMore
                             expand={expanded}
                             onClick={handleExpandClick}

@@ -2,7 +2,7 @@ import Craftsmans from "./Craftsmans";
 import { useDispatch, useSelector } from 'react-redux';
 import { findCraftsmen, reset } from '../features/craftsman/craftsmanSlice';
 import { useState } from "react"
-import { Box, Button, TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material"
+import { Box, Button, TextField, Select, MenuItem, InputLabel, FormControl} from "@mui/material"
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from 'react-toastify'
 
@@ -10,15 +10,15 @@ function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 
-const Home = () => {
+const Home = (props) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [searchTerm, setSearchTerm] = useState('');
     const [city, setCity] = useState('')
     const query = useQuery();
-    const page = query.get('page') || 1;
-    const searchQuery = query.get('searchQuery');
+//    const page = query.get('page') || 1;
+//   const searchQuery = query.get('searchQuery');
     const { craftsman } = useSelector((state) => state.craftsman);
 
     const handleCity = (e) => {
@@ -88,12 +88,13 @@ const Home = () => {
                         </MenuItem>
                         <MenuItem value={'Novi Sad'}>Novi Sad</MenuItem>
                         <MenuItem value={'Beograd'}>Beograd</MenuItem>
+                        <MenuItem value={'Subotica'}>Subotica</MenuItem>
                     </Select>
 
                     <TextField
                         type="text"
                         value={searchTerm}
-                        label="Unesite profesiju majstora"
+                        label="Unesite profesiju"
                         variant="filled"
                         onChange={(e) => { setSearchTerm(e.target.value) }}
                         onKeyDown={handleKey}

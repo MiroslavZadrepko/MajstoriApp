@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Navigation from "./components/Navigation";
@@ -17,7 +16,6 @@ import theme from "./components/styles/theme";
 
 function App() {
 
-  const user = useSelector((state) => state.auth);
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -41,7 +39,6 @@ function App() {
         </Router>
 
         <ToastContainer />
-
       </div>
     </ThemeProvider>
   );
