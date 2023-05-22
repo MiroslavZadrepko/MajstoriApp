@@ -12,7 +12,6 @@ const AddCraftsman = () => {
         craftsman_last_name: '',
         craftsman_professionion: '',
         craftsman_city: '',
-        
         craftsman_phone: '',
         craftsman_rev: []
     })

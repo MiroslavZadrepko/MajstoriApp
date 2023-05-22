@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllTmpCraftsman, reset } from '../features/craftsman/craftsmanSlice';
 import TmpCraftsman from './TmpCraftsman';
+import Spiner from './Spiner';
 
 const AdminHandleCraft = () => {
 
@@ -33,11 +34,14 @@ const AdminHandleCraft = () => {
                 }}>
 
                 {craftsman != null ?
-                    craftsman.map((el) => (<TmpCraftsman key={el._id} el={el} />)) :
-                    <p>Nema novih predloga majstora</p>}
+                    craftsman.map((el) => (<TmpCraftsman key={el._id} el={el} />  )) :
+                    <p>Nema novih predloga majstora</p> }
+                    
             </Box>
         </>
-    )}
+    ) } else {
+        return (<> <Spiner /> </>)
+    }
 }
 
 

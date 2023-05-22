@@ -33,4 +33,12 @@ const tmpCraftsmanSchema = mongoose.Schema({
 }, { timestamps: true }
 );
 
+tmpCraftsmanSchema.pre('findOne', function(next) {
+    this.populate({
+        path: 'user', 
+        select: 'user_name user_email'
+    });
+    next();
+});
+ 
 module.exports = mongoose.model('TmpCraftsman', tmpCraftsmanSchema);

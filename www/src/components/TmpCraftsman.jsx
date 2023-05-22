@@ -6,6 +6,14 @@ const TmpCraftsman = ({ el }) => {
 
     const dispatch = useDispatch();
 
+    console.log(el);
+
+    let id = el.user;
+
+    //TO DO dispatch find user po el.user, pa slice, pa service, pa controler. Verovatno će ići kroz User model
+
+    console.log(id);
+
     return (
 
         <Box sx={{

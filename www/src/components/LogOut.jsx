@@ -13,6 +13,7 @@ const LogOut = ({ setUser, isLoged, setIsLoged, isAdmin, setIsAdmin }) => {
             }
             if (isAdmin) {
                 setIsAdmin(prev => !prev)
+                setUser(null)
             }
 
         }, 2000);

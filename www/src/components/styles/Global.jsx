@@ -17,7 +17,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-clip: content-box;
+    overflow-y: overlay;
 }
 
 #back-to-top-anchor{
