@@ -9,12 +9,12 @@ const TmpCraftsman = ({ el }) => {
     console.log(el);
 
     let id = el.user;
-
+    
     //TO DO dispatch find user po el.user, pa slice, pa service, pa controler. Verovatno će ići kroz User model
 
     console.log(id);
 
-    return (
+    return ( 
 
         <Box sx={{
             backgroundColor: 'background.paper',
@@ -25,7 +25,7 @@ const TmpCraftsman = ({ el }) => {
             minWidth: 300,
         }} >
 
-            <p>Created by {el.user}</p>
+            <p>Created by {el.user.user_name}</p>
             {el.craftsman_name} {el.craftsman_last_name}, {el.craftsman_city}  <br />
             {el.craftsman_professionion} <br />
             {el.craftsman_phone} <br />

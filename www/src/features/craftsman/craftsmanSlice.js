@@ -107,7 +107,7 @@ export const findCraftsmen = createAsyncThunk(
             return thunkAPI.rejectWithValue(message);
         }
     }
-)
+);
 
 export const craftsmanSlice = createSlice({
     name: 'craftsman',

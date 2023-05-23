@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const TmpCraftsman = require('../models/tmpCraftsmanModel') //source
 const Craftsman = require('../models/craftsmanModel')
+const User = require('../models/userModel') //source
 
 /**GET TMP CRAFTSMEN***********
  * GET /api/admin/tmpcraftsmen*

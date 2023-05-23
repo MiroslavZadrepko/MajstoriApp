@@ -1,11 +1,25 @@
 const mongoose = require('mongoose');
 
 const tmpCraftsmanSchema = mongoose.Schema({
+
     user: {
+        user_name: {
+            type: String,
+            required: true,
+            ref: 'User'
+        },
+        user_email: {
+            type: String,
+            required: true,
+            ref: 'User'
+        }
+        
+    },
+    /**user: { //UMESTO OVOGA UBACITI IME I PREZIME, A ID DA BUDE SAKRIVEN
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
-    },
+    },*/
     craftsman_name: {
         type: String,
         required: [true, 'Please add crfatsmans name']
@@ -22,7 +36,7 @@ const tmpCraftsmanSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please add crfatsmans city']
     },
-   
+
     craftsman_phone: {
         type: Number,
         required: [true, 'Please add crfatsmans phonenumber']
@@ -33,12 +47,12 @@ const tmpCraftsmanSchema = mongoose.Schema({
 }, { timestamps: true }
 );
 
-tmpCraftsmanSchema.pre('findOne', function(next) {
+tmpCraftsmanSchema.pre('findOne', function (next) {
     this.populate({
-        path: 'user', 
+        path: 'user',
         select: 'user_name user_email'
     });
     next();
 });
- 
+
 module.exports = mongoose.model('TmpCraftsman', tmpCraftsmanSchema);
