@@ -17,7 +17,7 @@ const TmpCraftsman = ({ el }) => {
             minWidth: 300,
         }} >
 
-            <p>Created by {el.user.user_name} <br />
+            <p>Created by: {el.user.user_name} <br />
                 {el.user.user_email} <br /></p>
             {el.craftsman_name} {el.craftsman_last_name}, {el.craftsman_city}  <br />
             {el.craftsman_professionion} <br />
@@ -29,7 +29,6 @@ const TmpCraftsman = ({ el }) => {
                 <Button variant='contained'
                     onClick={() => dispatch(moveTmpCraftsman(el._id))}>Dodaj u bazu</Button>
             </Box>
-            {console.log(el)}
         </Box>
     )
 };

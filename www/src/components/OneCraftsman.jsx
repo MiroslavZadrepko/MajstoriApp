@@ -1,6 +1,6 @@
-import { Card, CardContent, IconButton, Collapse, CardActions } from "@mui/material";
+import { Box, Button, Card, CardContent, IconButton, Collapse, CardActions } from "@mui/material";
 import { styled } from '@mui/material/styles';
-import { Box } from "@mui/system";
+import { useSelector } from 'react-redux';
 import { useState } from "react";
 import { Navigate } from "react-router";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -18,12 +18,27 @@ const ExpandMore = styled((props) => {
 }));
 
 const OneCraftsman = ({ filtrirani, id }) => {
+
     const [expanded, setExpanded] = useState(false);
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
-    let majstor = filtrirani.find(element => element._id == id)
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    let majstor = filtrirani.find(element => element._id == id);
+
+    const [click, setClick] = useState(false)
+
+    const handleRev = (e) => {
+        e.preventDefault();
+
+        /** 
+         * button otvara prozor u koji se unosi recenzija,
+         * BUTTON se menja u dodaj recenziju
+         * na click recenzija ide u tmpRev
+         * TREBA ID majstora i ID usera  */
+    }
 
     return majstor ?
         <>
@@ -57,16 +72,16 @@ const OneCraftsman = ({ filtrirani, id }) => {
                             <p>{majstor.craftsman_phone}</p>
                             <h3>Recenzije:</h3>
                             {majstor.craftsman_rev.length > 0 ? majstor.craftsman_rev.map((el) => <p key={el}>"{el}"</p>) : <p>Još nema recenzija</p>}
+                            {user ?
+                                <Button variant="contained" onClick={() => { setClick(!click) }}> Dodajte recenziju  </Button> : ''}
+                                {click && <Review />}
+
                         </CardContent>
                     </Collapse>
                 </Card>
-                <div>
-                    {  /* IMPORT USER FROM STATE user ? <Review id={id} /> : ''*/}
-                </div>
             </Box>
         </>
         : <Navigate to='/Craftsmans' />
-
 }
 
 export default OneCraftsman;

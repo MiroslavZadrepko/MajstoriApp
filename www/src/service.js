@@ -5,8 +5,6 @@ const USER_URL = '/api/user/';
  * USER SERVICES*
  ***************/
 
-// export const getAllCraftsmans = () => axios.get(`http://localhost:8080/craftsmen`)
-
 export const getAllUsers = () => axios.get(USER_URL)
 
 export const addTmpReview = (rewTxt, rewCraftID) => axios.post(`http://localhost:8080/tmpreviews`, { rewTxt, rewCraftID })

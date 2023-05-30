@@ -2,13 +2,15 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Tab, Tabs } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout, reset } from '../features/auth/authSlice'
+import { logout, reset } from '../features/auth/authSlice';
+import { resetCraftsman } from '../features/craftsman/craftsmanSlice';
 
 function Navigation() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth)
+  const craft = useSelector((state) => state.craftsman)
 
   const [value, setValue] = useState('/');
 
@@ -17,8 +19,8 @@ function Navigation() {
   };
 
   useEffect(() => {
-    let path = window.location.pathname; 
-    
+    let path = window.location.pathname;
+
     if (user.user && !user.user.admin && path === "/" && value !== 0) setValue('/');
     else if (user.user && !user.user.admin && path === "/logout" && value !== 1) setValue('/logout');
     else if (user.user && !user.user.admin && path === "/addcraftsman" && value !== 2) setValue('/addcraftsman');
@@ -29,10 +31,16 @@ function Navigation() {
 
   const onLogout = () => {
     dispatch(logout());
+    dispatch(resetCraftsman())
     dispatch(reset());
     navigate('/');
   }
-  
+
+  const refresh = () => {
+    window.location.reload(true);
+    window.location.href = '/';
+  }
+
   return (
     <Tabs
       value={value}
@@ -43,7 +51,8 @@ function Navigation() {
         label='Home'
         value='/'
         to='/'
-        component={RouterLink} />
+        component={RouterLink} 
+        onClick={refresh}/>
 
       {user.user || user.admin ?
         <Tab onClick={onLogout}
@@ -64,7 +73,7 @@ function Navigation() {
           component={RouterLink}
           to="/register" /> :
         ''}
-      
+
       {user.user && !user.user.admin ?
         <Tab
           label='Dodaj majstora'
@@ -72,7 +81,7 @@ function Navigation() {
           component={RouterLink}
           to="/addcraftsman" /> :
         ''}
-      
+
       {user.user && user.user.admin ?
         <Tab
           label='Admin'
@@ -80,7 +89,6 @@ function Navigation() {
           component={RouterLink}
           to="/admin" /> :
         ''}
-
     </Tabs>
   )
 }

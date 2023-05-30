@@ -94,7 +94,7 @@ export const moveTmpCraftsman = createAsyncThunk(
 //find all craftsman by profession 
 export const findCraftsmen = createAsyncThunk(
     'craftsman/findCraftsmen',
-    async (searchTerm, thunkAPI) =>{
+    async (searchTerm, thunkAPI) => {
         try {
             return await services.findCraftsmen(searchTerm);
         } catch (error) {
@@ -108,6 +108,22 @@ export const findCraftsmen = createAsyncThunk(
         }
     }
 );
+
+export const resetCraftsman = createAsyncThunk(
+    'craftsman/resetCrafts',
+    async (_, thunkAPI) => {
+        try {
+
+        } catch (error) {
+            const message = (
+                error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+                error.message ||
+                error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    })
 
 export const craftsmanSlice = createSlice({
     name: 'craftsman',
@@ -135,7 +151,7 @@ export const craftsmanSlice = createSlice({
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
-            }) 
+            })
             //get all tmp kraftsman by admin
             .addCase(getAllTmpCraftsman.pending, (state) => {
                 state.isLoading = true;
@@ -191,6 +207,9 @@ export const craftsmanSlice = createSlice({
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
+            })
+            .addCase(resetCraftsman.fulfilled, (state) => {
+                state.craftsman = null;
             })
     }
 });
