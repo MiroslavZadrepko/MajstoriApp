@@ -15,7 +15,7 @@ const tmpCraftsmanSchema = mongoose.Schema({
         }
         
     },
-    /**user: { //UMESTO OVOGA UBACITI IME I PREZIME, A ID DA BUDE SAKRIVEN
+    /**user: { //NE BRISATI, VEROVATNO ĆE MI NEKAD NEGDE TREBATI _id KREATORA
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'

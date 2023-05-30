@@ -12,39 +12,36 @@ const AdminHandleCraft = () => {
     const { craftsman, isError, message } = useSelector((state) => state.craftsman)
 
     useEffect(() => {
-
         dispatch(getAllTmpCraftsman());
-
         return () => {
             dispatch(reset());
         }
-
     }, [isError, message, dispatch]);
 
-    if (craftsman != null) {
-    return (
-        <>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'space-evenly',
-                    m: 5,
-                }}>
+    if (craftsman == null) {
 
-                {craftsman != null ?
-                    craftsman.map((el) => (<TmpCraftsman key={el._id} el={el} />  )) :
-                    <p>Nema novih predloga majstora</p> }
-                    
-            </Box>
-        </>
-    ) } else {
         return (<> <Spiner /> </>)
+
+    } else {
+
+        return (
+            <>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'space-evenly',
+                        m: 5,
+                    }}>
+
+                    {craftsman != null ? craftsman.length > 0 ?   
+                        craftsman.map((el) => (<TmpCraftsman key={el._id} el={el} />)) : 
+                        <p>Nema novih predloga majstora</p> : ''} 
+                </Box>
+            </>
+        )
     }
 }
-
-
-
 
 export default AdminHandleCraft;
