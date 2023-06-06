@@ -125,6 +125,26 @@ export const resetCraftsman = createAsyncThunk(
         }
     })
 
+export const addTmpReview = createAsyncThunk(
+    'tmpreview/create',
+    async (tmpReview, thunkAPI) => {
+
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await services.addTmpReview(tmpReview, token);
+
+        } catch (error) {
+            const message = (
+                error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+                error.message ||
+                error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+)
+
 export const craftsmanSlice = createSlice({
     name: 'craftsman',
     initialState,
@@ -208,8 +228,21 @@ export const craftsmanSlice = createSlice({
                 state.isError = true
                 state.message = action.payload
             })
-            .addCase(resetCraftsman.fulfilled, (state) => {
+            .addCase(resetCraftsman, (state) => {
                 state.craftsman = null;
+            })
+            .addCase(addTmpReview.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(addTmpReview.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.craftsman = action.payload;
+            })
+            .addCase(addTmpReview.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
             })
     }
 });

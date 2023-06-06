@@ -17,9 +17,13 @@ const Home = (props) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [city, setCity] = useState('')
     const query = useQuery();
-//    const page = query.get('page') || 1;
-//   const searchQuery = query.get('searchQuery');
     const { craftsman } = useSelector((state) => state.craftsman);
+    
+    let res = Array.isArray(craftsman)
+   
+    if (!res) {
+        dispatch(findCraftsmen());
+    } 
 
     const handleCity = (e) => {
         setCity(e.target.value);
@@ -57,7 +61,7 @@ const Home = (props) => {
 
     let filtrirani = null;
 
-    if (craftsman != null && city != '') {
+    if (craftsman != null && res && city != '') {
         filtrirani = craftsman.filter((craftsman) => {
             return craftsman.craftsman_city.toLowerCase().includes(city.toLowerCase())
         })

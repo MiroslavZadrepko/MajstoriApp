@@ -24,7 +24,6 @@ const deleteTmpCraftsman = async (id, token) => {
             Authorization: `Bearer ${token}`
         }
     };
-
     const response = await axios.delete(ADMIN_URL + `tmpcraftsmen/` + id, config);
     return response.data;
 };
@@ -53,9 +52,20 @@ const createTmpCraftsman = async (craftsman, token) => {
             Authorization: `Bearer ${token}`
         }
     };
-    const response = await axios.post(TMP_URL, craftsman, config);
+    const response = await axios.post(TMP_URL + `tmpcraftsmen/`, craftsman, config);
     return response.data;
 };
+
+// create tmp rev by user, store in tmp
+const addTmpReview = async (recenzija, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+    const response = await axios.post(TMP_URL + `tmpreviews`, recenzija, config);
+    return response.data;
+}
 
 const USER_URL = '/api/user/';
 const findCraftsmen = async (searchTerm) => {
@@ -69,7 +79,8 @@ const services = {
     getAllTmpCraftsman,
     deleteTmpCraftsman,
     moveTmpCraftsman,
-    findCraftsmen
+    findCraftsmen,
+    addTmpReview
 };
 
 export default services;

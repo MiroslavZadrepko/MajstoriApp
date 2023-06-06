@@ -53,39 +53,27 @@ const addTmpCraftsman = asyncHandler(async (req, res) => {
     }
 });
 
-
-
-// POST api/tmp/:id
+// POST api/tmp/???
 const addTmpReviw = asyncHandler(async (req, res) => {
 
-    const { revTxt, revCraftID } = req.body;
+    const { creator, revTxt,revCraftID } = req.body;
 
-    //add find craftsman by ID
-
-    //check if all fields are filled
-    if (!revTxt || !revCraftID) {
+    /*check if all fields are filled
+    if (!recenzija) {
         res.status(400)
         throw new Error('All fields must bi filled');
-    }
-
-    const user = await User.findById(req.user.id);
-    //add created by const {user_name, user_last_name} = user
-    if (!user) {
-        res.status(401);
-        throw new Error('User not found');
-    }
+    }*/
 
     //create tmp rev
     const tmpReviw = await TmpReview.create({
-        user,
-        revTxt,
-        revCraftID
+        creator: req.body.creator,
+        revTxt: req.body.revTxt,
+        revCraftID: req.body.revCraftID
     })
 
     if (tmpReviw) {
         res.status(201).json({
-            _id: tmpReviw.id,
-            user: tmpReviw.user,
+            creator: tmpReviw.creator,
             revTxt: tmpReviw.revTxt,
             revCraftID: tmpReviw.revCraftID
         })
