@@ -7,8 +7,6 @@ const USER_URL = '/api/user/';
 
 export const getAllUsers = () => axios.get(USER_URL)
 
-export const addTmpReview = (rewTxt, rewCraftID) => axios.post(`http://localhost:8080/tmpreviews`, { rewTxt, rewCraftID })
-
 /****************
  * ADMIN SEVICES*
  ***************/

@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const TmpCraftsman = require('../models/tmpCraftsmanModel') //source
+const TmpReview = require('../models/tmpReviewModel')
 const Craftsman = require('../models/craftsmanModel')
 const User = require('../models/userModel') //source
 
@@ -60,20 +61,39 @@ const addCraftsman = asyncHandler(async (req, res) => {
     await craftsman.remove();
 
     res.status(200).json({ id: req.params.id });
-})
+});
+
+/** get all tmp revs********
+ * GET api/admin/tmpreviews*
+ **************************/
+
+const getTmpRev = asyncHandler(async (req, res) => {
+    const revs = await TmpReview.find();
+    res.status(200).json(revs);
+});
+
+
+const deleteTmpRev = asyncHandler(async (req, res) => {
+
+    const rev = await TmpReview.findById(req.params.id);
+
+    if (!rev) {
+        res.status(400)
+        throw new Error('rev not found')
+    };
+
+    await rev.remove();
+
+    res.status(200).json({ id: req.params.id });
+
+});
 
 //************************TO BE DONE********************************* */
 
-const getTmpReview = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: '/api/admin get Tmp Review works' })
-})
+
 
 const addReview = asyncHandler(async (req, rev) => {
     res.status(200).json({ message: '/api/admin add Review works' })
-})
-
-const deleteTmpReview = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: '/api/admin delete Tmp Review works' })
 })
 
 const getAllUsers = asyncHandler(async (req, res) => {
@@ -83,9 +103,9 @@ const getAllUsers = asyncHandler(async (req, res) => {
 module.exports = {
     getAllUsers,
     getTmpCraftsman,
-    getTmpReview,
+    getTmpRev,
     addCraftsman,
     addReview,
     deleteTmpCrafstman,
-    deleteTmpReview
+    deleteTmpRev
 }

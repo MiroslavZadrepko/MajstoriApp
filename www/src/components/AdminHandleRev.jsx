@@ -1,46 +1,36 @@
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
-import { delTmpReview, getTmpReview } from "../service";
-
+import services from "../features/craftsman/craftsmanService.js"
+import TmpRev from "./TmpRev.jsx";
 
 const AdminHandleRev = () => {
-
-    return(<p>ovde će biti adminovo rešavanje recenzija</p>)
-    /*
-    //povlačenje recenzija, povlačenje majstora po ID iz poruka, po ID majstora push u recenzije
+    const { getAllTmpRevs } = services;
     const [allTmpReview, setAllTmpReview] = useState([]);
 
     useEffect(() => {
-        getTmpReview().then(res => {
-            setAllTmpReview(res.data);
+        getAllTmpRevs().then(res => {
+            setAllTmpReview(res);
         });
     }, []);
 
-    const removeRev = id => {
-        const removeRev = [...allTmpReview].filter(rev => rev.id !== id);
+    console.log(allTmpReview)
 
-        setAllTmpReview(removeRev);
-
-        delTmpReview(id).then(res => {
-            //console.log(res.data);
-        });
-    };
-
-    //slice, ubacivanje tog elemnta u novi niz,  pa filter bez tog elementa
     return (
         <>
-            <Box>
-
-                {allTmpReview.map((el => <>
-                    <p key={el.id}> {el.rewTxt} </p>
-                    <button>Dodaj</button>
-                    <button onClick={() => removeRev(el.id)}>Obriši</button> <hr />
-                </>
-                ))}
+            <Box  sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'space-evenly',
+                        m: 5,
+                    }}>
+                {allTmpReview ?
+                    allTmpReview.map((el =>(<TmpRev allTmpReview = {allTmpReview} setAllTmpReview={setAllTmpReview} key={el._id} el={el} />))) : 
+                    <p>Nema novih predloga majstora</p> }
             </Box>
 
         </>
-    );*/
+    );
 }
 
 export default AdminHandleRev;

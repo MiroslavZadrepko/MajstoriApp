@@ -58,12 +58,6 @@ const addTmpReviw = asyncHandler(async (req, res) => {
 
     const { creator, revTxt,revCraftID } = req.body;
 
-    /*check if all fields are filled
-    if (!recenzija) {
-        res.status(400)
-        throw new Error('All fields must bi filled');
-    }*/
-
     //create tmp rev
     const tmpReviw = await TmpReview.create({
         creator: req.body.creator,

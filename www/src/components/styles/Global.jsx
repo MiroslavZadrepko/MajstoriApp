@@ -26,7 +26,5 @@ body {
 .faqbtn{
     float: left;
     margin-top: 5vh;
-}
-
-`
+}`
 export default GlobalStyles;

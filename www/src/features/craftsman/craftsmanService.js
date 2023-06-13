@@ -39,6 +39,27 @@ const moveTmpCraftsman = async (id, token) => {
     return response.data;
 };
 
+//admin gets all tmp revs 
+const getAllTmpRevs = async (token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+    const response = await axios.get(ADMIN_URL + `tmpreviews`, config);
+    return response.data;
+};
+
+const deleteTmpRev = async (id, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+    const response = await axios.delete(ADMIN_URL + `tmpreviews/` + id, config);
+    return response.data;
+};
+
 /////////////////
 //USER SERVICES//
 /////////////////
@@ -80,7 +101,9 @@ const services = {
     deleteTmpCraftsman,
     moveTmpCraftsman,
     findCraftsmen,
-    addTmpReview
+    addTmpReview,
+    getAllTmpRevs,
+    deleteTmpRev
 };
 
 export default services;

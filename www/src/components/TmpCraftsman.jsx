@@ -14,7 +14,7 @@ const TmpCraftsman = ({ el }) => {
             borderRadius: 2,
             p: 2,
             m: 1,
-            minWidth: 300,
+            minWidth: 500,
         }} >
 
             <p>Created by: {el.user.user_name} <br />

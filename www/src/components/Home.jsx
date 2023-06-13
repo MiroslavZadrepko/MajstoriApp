@@ -2,7 +2,7 @@ import Craftsmans from "./Craftsmans";
 import { useDispatch, useSelector } from 'react-redux';
 import { findCraftsmen, reset } from '../features/craftsman/craftsmanSlice';
 import { useState } from "react"
-import { Box, Button, TextField, Select, MenuItem, InputLabel, FormControl} from "@mui/material"
+import { Box, Button, TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material"
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from 'react-toastify'
 
@@ -18,12 +18,12 @@ const Home = (props) => {
     const [city, setCity] = useState('')
     const query = useQuery();
     const { craftsman } = useSelector((state) => state.craftsman);
-    
+
     let res = Array.isArray(craftsman)
-   
-    if (!res) {
+
+    if (!res && city !== '' && searchTerm !== '') {
         dispatch(findCraftsmen());
-    } 
+    }
 
     const handleCity = (e) => {
         setCity(e.target.value);
@@ -31,8 +31,8 @@ const Home = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (city == '') {
-            toast.warning('Morate izabrati grad !', {
+        if (city === '' || searchTerm === '') {
+            toast.warning('Morate izabrati i grad i profesiju !', {
                 position: toast.POSITION.TOP_CENTER
             });
         } else {
@@ -41,12 +41,14 @@ const Home = (props) => {
                 dispatch(reset());
             }
         }
+        setSearchTerm('');
+        setCity('');
     }
 
     const handleKey = (e) => {
         if (e.key === 'Enter') {
             if (city == '') {
-                toast.warning('Morate izabrati grad !', {
+                toast.warning('Morate izabrati profesiju !', {
                     position: toast.POSITION.TOP_CENTER
                 });
             } else {
@@ -61,7 +63,7 @@ const Home = (props) => {
 
     let filtrirani = null;
 
-    if (craftsman != null && res && city != '') {
+    if (craftsman != null && res && city !== '' && searchTerm !== '') {
         filtrirani = craftsman.filter((craftsman) => {
             return craftsman.craftsman_city.toLowerCase().includes(city.toLowerCase())
         })
@@ -70,7 +72,7 @@ const Home = (props) => {
     return (
         <Box component='div'>
             <Box component='div'
-                sx={{                    
+                sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -79,7 +81,7 @@ const Home = (props) => {
                 }}>
                 <FormControl variant="filled" >
                     <InputLabel id="demo-simple-select-filled-label" >Izaberite grad</InputLabel>
-                    <Select 
+                    <Select
                         labelId="demo-simple-select-filled-label"
                         id="demo-simple-select-filled"
                         value={city}
