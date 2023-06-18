@@ -60,6 +60,16 @@ const deleteTmpRev = async (id, token) => {
     return response.data;
 };
 
+//admin moves tmp rev to craftsan and
+const addReview = async (id, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    };
+    const response = await axios.post(ADMIN_URL + `craftsmen/` + id + '/review/', config);
+    return response.data
+}
 /////////////////
 //USER SERVICES//
 /////////////////
@@ -103,7 +113,8 @@ const services = {
     findCraftsmen,
     addTmpReview,
     getAllTmpRevs,
-    deleteTmpRev
+    deleteTmpRev,
+    addReview
 };
 
 export default services;

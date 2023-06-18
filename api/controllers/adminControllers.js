@@ -72,29 +72,41 @@ const getTmpRev = asyncHandler(async (req, res) => {
     res.status(200).json(revs);
 });
 
-
+/** DELETE TMP REV FROM TMPREV COLLECTOIN */
 const deleteTmpRev = asyncHandler(async (req, res) => {
+    const rev = await TmpReview.findById(req.params.id);
+    if (!rev) {
+        res.status(400)
+        throw new Error('rev not found')
+    };
+    await rev.remove();
+    res.status(200).json({ id: req.params.id });
+});
+
+/**MOVE TMP REV TO ADECUATE CRAFTSMAN */
+const addReview = asyncHandler(async (req, res) => {
 
     const rev = await TmpReview.findById(req.params.id);
-
     if (!rev) {
         res.status(400)
         throw new Error('rev not found')
     };
 
-    await rev.remove();
-
+    const id = {_id: rev.revCraftID}
+    const findCraftsman = await Craftsman.findById(id);
+     
+    if (!findCraftsman) {
+        res.status(400);
+        throw new Error('greška prilikom ažuriranja')
+    }
+    
+    await findCraftsman.craftsman_rev.push(rev.revTxt);
+    await findCraftsman.save();
     res.status(200).json({ id: req.params.id });
-
+    
 });
 
 //************************TO BE DONE********************************* */
-
-
-
-const addReview = asyncHandler(async (req, rev) => {
-    res.status(200).json({ message: '/api/admin add Review works' })
-})
 
 const getAllUsers = asyncHandler(async (req, res) => {
     res.status(200).json({ message: '/api/admin get All Users works' })

@@ -18,7 +18,7 @@ routerAdmin.get('/tmpcraftsmen', getTmpCraftsman);
 routerAdmin.get('/tmpreviews', getTmpRev);
 routerAdmin.delete('/tmpcraftsmen/:id', addCraftsman);
 routerAdmin.delete('/tmpreviews/:id', deleteTmpRev);
-routerAdmin.put('/', addReview);
+routerAdmin.post('/craftsmen/:id/review', addReview);
 routerAdmin.delete('/tmpcraftsmen/:id', deleteTmpCrafstman);
 
 module.exports = routerAdmin;

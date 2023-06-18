@@ -3,20 +3,26 @@ import services from '../features/craftsman/craftsmanService.js';
 
 const TmpRev = ({ el, allTmpReview, setAllTmpReview }) => {
 
-    const { deleteTmpRev } = services;
+    const { deleteTmpRev, addReview } = services;
 
     const removeRev = (id) => {
-        console.log(el._id)
         const removeRev = [...allTmpReview].filter(rev => rev._id !== id);
-
         setAllTmpReview(removeRev);
-        console.log(removeRev);
-
         deleteTmpRev(id).then(res => {
             console.log(res);
         });
     };
 
+    const addRev = (id) => {
+
+        const removeRev = [...allTmpReview].filter(rev => rev._id !== id);
+        setAllTmpReview(removeRev);
+        console.log(id)
+        addReview(id).then(res => {
+            console.log(res);
+        })
+        deleteTmpRev(id)
+    }
 
     return (
 
@@ -35,7 +41,7 @@ const TmpRev = ({ el, allTmpReview, setAllTmpReview }) => {
                 <Button variant='contained'
                     onClick={() => removeRev(el._id)}>Obriši recenziju</Button>
                 <Button variant='contained'
-                    onClick>Dodaj recenziju</Button>
+                    onClick={() => addRev(el._id)}>Dodaj recenziju</Button>
             </Box>
         </Box>
     )

@@ -125,6 +125,7 @@ export const resetCraftsman = createAsyncThunk(
         }
     })
 
+//add rev by user to tmp revs
 export const addTmpReview = createAsyncThunk(
     'tmpreview/create',
     async (tmpReview, thunkAPI) => {
@@ -143,7 +144,29 @@ export const addTmpReview = createAsyncThunk(
             return thunkAPI.rejectWithValue(message);
         }
     }
-)
+);
+
+//move tmp review to craftsman 
+export const addReview = createAsyncThunk(
+    'tmpreview/moveRev',
+    async (id, review, thunkAPI) => {
+
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await services.addReview(id, review, token);
+
+        } catch (error) {
+            const message = (
+                error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+                error.message ||
+                error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
 
 export const craftsmanSlice = createSlice({
     name: 'craftsman',
@@ -240,6 +263,19 @@ export const craftsmanSlice = createSlice({
                 state.craftsman = action.payload;
             })
             .addCase(addTmpReview.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+            .addCase(addReview.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(addReview.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.craftsman = action.payload;
+            })
+            .addCase(addReview.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
