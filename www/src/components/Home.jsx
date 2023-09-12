@@ -3,27 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { findCraftsmen, reset } from '../features/craftsman/craftsmanSlice';
 import { useState } from "react"
 import { Box, Button, TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material"
-import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from 'react-toastify'
 
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
+const Home = () => {
 
-const Home = (props) => {
-
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [searchTerm, setSearchTerm] = useState('');
     const [city, setCity] = useState('')
-    const query = useQuery();
     const { craftsman } = useSelector((state) => state.craftsman);
 
     let res = Array.isArray(craftsman)
 
     if (!res && city !== '' && searchTerm !== '') {
         dispatch(findCraftsmen());
-    }
+    };
 
     const handleCity = (e) => {
         setCity(e.target.value);
@@ -41,9 +34,7 @@ const Home = (props) => {
                 dispatch(reset());
             }
         }
-        setSearchTerm('');
-        setCity('');
-    }
+    };
 
     const handleKey = (e) => {
         if (e.key === 'Enter') {
@@ -58,14 +49,17 @@ const Home = (props) => {
                 }
             }
         }
-        navigate('/');
-    }
+    };
 
     let filtrirani = null;
 
     if (craftsman != null && res && city !== '' && searchTerm !== '') {
         filtrirani = craftsman.filter((craftsman) => {
-            return craftsman.craftsman_city.toLowerCase().includes(city.toLowerCase())
+            return (
+                craftsman.craftsman_city.toLowerCase().includes(city.toLowerCase())
+                &&
+                craftsman.craftsman_professionion.toLowerCase().includes(searchTerm.toLowerCase())
+            )
         })
     };
 
@@ -80,7 +74,7 @@ const Home = (props) => {
                     m: 5,
                 }}>
                 <FormControl variant="filled" >
-                    <InputLabel id="demo-simple-select-filled-label" >Izaberite grad</InputLabel>
+                    <InputLabel  id="demo-simple-select-filled-label" >Izaberite grad</InputLabel>
                     <Select
                         labelId="demo-simple-select-filled-label"
                         id="demo-simple-select-filled"
@@ -98,6 +92,7 @@ const Home = (props) => {
                     </Select>
 
                     <TextField
+                        onClick={() => { setSearchTerm('') }}
                         type="text"
                         value={searchTerm}
                         label="Unesite profesiju"
@@ -114,5 +109,5 @@ const Home = (props) => {
 
         </Box>
     );
-}
+};
 export default Home;

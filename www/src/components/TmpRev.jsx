@@ -17,7 +17,7 @@ const TmpRev = ({ el, allTmpReview, setAllTmpReview }) => {
 
         const removeRev = [...allTmpReview].filter(rev => rev._id !== id);
         setAllTmpReview(removeRev);
-        console.log(id)
+        
         addReview(id).then(res => {
             console.log(res);
         })

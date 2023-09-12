@@ -9,7 +9,7 @@ const AdminHandleCraft = () => {
 
     const dispatch = useDispatch();
 
-    const { craftsman, isError, message } = useSelector((state) => state.craftsman)
+    const { craftsman, isError, message } = useSelector((state) => state.craftsman);
 
     useEffect(() => {
         dispatch(getAllTmpCraftsman());
@@ -18,7 +18,7 @@ const AdminHandleCraft = () => {
         }
     }, [isError, message, dispatch]);
 
-    if (craftsman == null) {
+    if (craftsman === null) {
 
         return (<> <Spiner /> </>)
 
@@ -42,6 +42,6 @@ const AdminHandleCraft = () => {
             </>
         )
     }
-}
+};
 
 export default AdminHandleCraft;
