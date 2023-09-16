@@ -13,8 +13,6 @@ const AdminHandleRev = () => {
         });
     }, []);
 
-    console.log(allTmpReview)
-
     return (
         <>
             <Box  sx={{

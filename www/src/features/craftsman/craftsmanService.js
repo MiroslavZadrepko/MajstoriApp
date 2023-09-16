@@ -60,7 +60,7 @@ const deleteTmpRev = async (id, token) => {
     return response.data;
 };
 
-//admin moves tmp rev to craftsan and
+//admin moves tmp rev to craftsan
 const addReview = async (id, token) => {
     const config = {
         headers: {

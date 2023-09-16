@@ -60,7 +60,7 @@ const OneCraftsman = ({ filtrirani, id }) => {
                             <p>{majstor.craftsman_professionion}</p>
                             <p>{majstor.craftsman_phone}</p>
                             <h3>Recenzije:</h3>
-                            {majstor.craftsman_rev.length > 0 ? majstor.craftsman_rev.map((el) => <p key={el}>"{el}"</p>) : click ? '' : <p>Još nema recenzija</p>}
+                            {majstor.craftsman_rev.length > 0 ? majstor.craftsman_rev.map((el) => <p key={el}>{el}</p>) : click ? '' : <p>Još nema recenzija</p>}
                             {!user ? '' :
                                 !click ?
                                     <Button variant="contained" onClick={() => { setClick(!click) }}> Dodajte recenziju </Button>

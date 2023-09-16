@@ -14,10 +14,8 @@ const TmpRev = ({ el, allTmpReview, setAllTmpReview }) => {
     };
 
     const addRev = (id) => {
-
         const removeRev = [...allTmpReview].filter(rev => rev._id !== id);
         setAllTmpReview(removeRev);
-        
         addReview(id).then(res => {
             console.log(res);
         })
@@ -48,4 +46,3 @@ const TmpRev = ({ el, allTmpReview, setAllTmpReview }) => {
 }
 
 export default TmpRev;
-

@@ -23,7 +23,7 @@ const craftsmanSchema = mongoose.Schema({
         required: [true, 'Please add crfatsmans phonenumber']
     },
     craftsman_rev: {
-        type: [String]
+        type: []
     }
 }, {timestamps: true},
 
