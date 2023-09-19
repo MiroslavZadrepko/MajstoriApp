@@ -1,8 +1,9 @@
-import { Box, Button, Card, CardContent, IconButton, Collapse, CardActions } from "@mui/material";
+import { Box, Button, Card, CardContent, IconButton, Collapse, CardActions, Typography } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import { useState } from "react";
 import { Navigate } from "react-router";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import OneRev from "./OneRev";
 import Review from "./Review";
 
 const ExpandMore = styled((props) => {
@@ -26,10 +27,11 @@ const OneCraftsman = ({ filtrirani, id }) => {
     const user = JSON.parse(localStorage.getItem('user'));
 
     let majstor = filtrirani.find(element => element._id == id);
-
+    
     const [click, setClick] = useState(false)
 
     return majstor ?
+    
         <>
             <Box>
                 <Card variant="outlined" sx={{
@@ -43,7 +45,7 @@ const OneCraftsman = ({ filtrirani, id }) => {
 
                     <CardActions disableSpacing>
                         <CardContent sx={{ py: 0, pl: 1, my: 0 }} >
-                            <p>{majstor.craftsman_name} {majstor.craftsman_last_name}, {majstor.craftsman_city}</p>
+                            <Typography variant="subtitle2" mb={0} fontSize={22}>{majstor.craftsman_name} {majstor.craftsman_last_name}, {majstor.craftsman_city}</Typography>
                         </CardContent>
                         <ExpandMore
                             expand={expanded}
@@ -57,10 +59,11 @@ const OneCraftsman = ({ filtrirani, id }) => {
 
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
                         <CardContent sx={{ py: 0 }} >
-                            <p>{majstor.craftsman_professionion}</p>
+                            <Typography>{majstor.craftsman_professionion}</Typography>
                             <p>{majstor.craftsman_phone}</p>
-                            <h3>Recenzije:</h3>
-                            {majstor.craftsman_rev.length > 0 ? majstor.craftsman_rev.map((el) => <p key={el}>{el}</p>) : click ? '' : <p>Još nema recenzija</p>}
+                            <Typography variant="subtitle2" mb={0} fontSize={22}>Recenzije:</Typography>
+                            {majstor.craftsman_rev.length > 0 ? 
+                            majstor.craftsman_rev.map((el) => <OneRev key={el} majstor={majstor}/>) : click ? '' : <p>Još nema recenzija</p>}
                             {!user ? '' :
                                 !click ?
                                     <Button variant="contained" onClick={() => { setClick(!click) }}> Dodajte recenziju </Button>

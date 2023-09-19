@@ -4,18 +4,15 @@ const tmpReviewSchema = mongoose.Schema({
     creator: {
         user_name: {
             type: String,
-            required: true,
-            
+            required: true,   
         },
         user_email: {
             type: String,
             required: true,
-            
         },
         id: {
             type: String,
             required: true,
-            
         }
     },
     revTxt: {

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const craftsmanSchema = mongoose.Schema({
+    
     craftsman_name: {
         type: String,
         required: [true, 'Please add crfatsmans name']

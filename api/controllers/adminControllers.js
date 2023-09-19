@@ -100,9 +100,12 @@ const addReview = asyncHandler(async (req, res) => {
         throw new Error('greška prilikom ažuriranja')
     }
     
-    //napraviti da rev.txt i rev.creator idu zajedno
-    
-    await findCraftsman.craftsman_rev.push([rev.revTxt] + `${"\n"} created by: ` + [rev.creator.user_name]);
+    const newReview = {
+        review: rev.revTxt,
+        creator: rev.creator.user_name
+    };
+
+    await findCraftsman.craftsman_rev.push(newReview);
     await findCraftsman.save();
     res.status(200).json({ id: req.params.id });
     
